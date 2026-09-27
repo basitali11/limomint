@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ClockIcon, SedanIcon, ShieldIcon } from "@/components/icons";
 import Reveal from "@/components/Reveal";
 
-const ABOUT_IMAGE = "/about/about-section.jfif";
+const ABOUT_IMAGE = "/about/about-section.jpg";
 
 const steps = [
   {

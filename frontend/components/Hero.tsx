@@ -3,7 +3,7 @@ import Link from "next/link";
 import { business } from "@/lib/data";
 
 const HERO_IMAGE =
-  "/hero/fleet-hero.jfif";
+  "/hero/fleet-hero.jpg";
 
 export default function Hero() {
   return (
