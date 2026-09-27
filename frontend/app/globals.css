@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+::selection {
+  background-color: #f2b705;
+  color: #0a0a0b;
+}
+
+.container-x {
+  @apply mx-auto w-full max-w-[1240px] px-6 md:px-10;
+}
+
+.eyebrow-rule {
+  @apply h-px w-10 bg-gold;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center rounded-md bg-gold px-7 py-3 text-sm font-semibold tracking-wide text-ink transition-all duration-300 hover:bg-gold-bright hover:shadow-[0_0_0_1px_#f2b705,0_8px_24px_-8px_rgba(242,183,5,0.6)];
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-md border border-ink-line px-7 py-3 text-sm font-semibold tracking-wide text-paper transition-all duration-300 hover:border-gold hover:text-gold;
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#about,
+#fleet,
+#services,
+/* #locations, */
+#faq,
+#contact {
+  scroll-margin-top: 92px;
+}
+
+@media (min-width: 1024px) {
+  #about,
+  #fleet,
+  #services,
+  /* #locations, */
+  #faq,
+  #contact {
+    scroll-margin-top: 150px;
+  }
+}
+
+/* The single-row sticky header is 64px on mobile and 80px on desktop. */
+#fleet {
+  scroll-margin-top: 72px;
+}
+
+@media (min-width: 1024px) {
+  #fleet {
+    scroll-margin-top: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
