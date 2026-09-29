@@ -88,23 +88,23 @@ def make_email(
 def branded_html_email(*, eyebrow: str, heading: str, intro: str, content: str) -> str:
     return f"""<!doctype html>
 <html lang="en">
-  <body style="margin:0;padding:0;background:#f1f0ed;color:#171719;font-family:Arial,Helvetica,sans-serif;">
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f1f0ed;padding:32px 12px;">
+  <body style="margin:0;padding:0;background:#f5f2ea;color:#202923;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#f5f2ea" style="background:#f5f2ea;padding:32px 12px;">
       <tr><td align="center">
-        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #e4e1da;">
-          <tr><td style="height:4px;background:#f2b705;font-size:0;line-height:0;">&nbsp;</td></tr>
-          <tr><td style="padding:28px 32px 22px;background:#0a0a0b;">
-            <p style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:bold;letter-spacing:1px;color:#f5f4f1;">LIMO<span style="color:#f2b705;">MINT</span></p>
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" bgcolor="#fffdf8" style="width:100%;max-width:600px;background:#fffdf8;border:1px solid #d8d1c4;">
+          <tr><td bgcolor="#172321" style="padding:28px 32px;background:#172321;border-bottom:3px solid #88652f;">
+            <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:24px;letter-spacing:1px;color:#f5f2ea;">LIMO<span style="color:#d8bd8a;">MINT</span></p>
+            <p style="margin:6px 0 0;font-size:12px;letter-spacing:1px;color:#c9c2b3;">Private chauffeur</p>
           </td></tr>
           <tr><td style="padding:34px 32px 12px;">
-            <p style="margin:0 0 10px;color:#9b7200;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">{eyebrow}</p>
-            <h1 style="margin:0;color:#171719;font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:normal;line-height:1.25;">{heading}</h1>
-            <p style="margin:16px 0 0;color:#55545a;font-size:15px;line-height:1.65;">{intro}</p>
+            <p style="margin:0 0 10px;color:#745526;font-size:13px;font-weight:bold;letter-spacing:0.5px;">{eyebrow}</p>
+            <h1 style="margin:0;color:#202923;font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:normal;line-height:1.25;">{heading}</h1>
+            <p style="margin:16px 0 0;color:#566159;font-size:15px;line-height:1.65;">{intro}</p>
           </td></tr>
           <tr><td style="padding:16px 32px 32px;">{content}</td></tr>
-          <tr><td style="padding:20px 32px;background:#f7f6f3;border-top:1px solid #e8e6e1;color:#6d6c70;font-size:12px;line-height:1.6;">
+          <tr><td bgcolor="#ece8de" style="padding:20px 32px;background:#ece8de;border-top:1px solid #d8d1c4;color:#5f685f;font-size:12px;line-height:1.6;">
             LimoMint | Private chauffeur service in Toronto and surrounding areas<br>
-            <a href="mailto:{escape(os.getenv('CONTACT_TO_EMAIL', ''), quote=True)}" style="color:#765800;text-decoration:none;">Contact LimoMint</a>
+            <a href="mailto:{escape(os.getenv('CONTACT_TO_EMAIL', ''), quote=True)}" style="color:#745526;text-decoration:none;">Contact LimoMint</a>
           </td></tr>
         </table>
       </td></tr>
@@ -120,15 +120,15 @@ def build_owner_email(contact: ContactRequest, config: SMTPConfig) -> EmailMessa
     message_html = escape(contact.message).replace("\n", "<br>")
     details_html = f"""
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:14px;line-height:1.6;">
-        <tr><td style="padding:10px 0;width:110px;color:#77757a;vertical-align:top;">Name</td><td style="padding:10px 0;color:#202024;font-weight:bold;">{name}</td></tr>
-        <tr><td style="padding:10px 0;border-top:1px solid #e9e7e2;color:#77757a;vertical-align:top;">Email</td><td style="padding:10px 0;border-top:1px solid #e9e7e2;"><a href="mailto:{visitor_email}" style="color:#765800;text-decoration:none;">{visitor_email}</a></td></tr>
-        <tr><td style="padding:10px 0;border-top:1px solid #e9e7e2;color:#77757a;vertical-align:top;">Phone</td><td style="padding:10px 0;border-top:1px solid #e9e7e2;color:#202024;">{phone}</td></tr>
+        <tr><td style="padding:10px 0;width:110px;color:#5f685f;vertical-align:top;">Name</td><td style="padding:10px 0;color:#202923;font-weight:bold;">{name}</td></tr>
+        <tr><td style="padding:10px 0;border-top:1px solid #d8d1c4;color:#5f685f;vertical-align:top;">Email</td><td style="padding:10px 0;border-top:1px solid #d8d1c4;"><a href="mailto:{visitor_email}" style="color:#745526;text-decoration:none;">{visitor_email}</a></td></tr>
+        <tr><td style="padding:10px 0;border-top:1px solid #d8d1c4;color:#5f685f;vertical-align:top;">Phone</td><td style="padding:10px 0;border-top:1px solid #d8d1c4;color:#202923;">{phone}</td></tr>
       </table>
-      <div style="margin-top:20px;padding:18px 20px;background:#f7f6f3;border-left:3px solid #f2b705;color:#343338;font-size:14px;line-height:1.7;">
-        <p style="margin:0 0 8px;color:#77757a;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Message</p>
+      <div style="margin-top:20px;padding:18px 20px;background:#f5f2ea;border:1px solid #d8d1c4;border-left:3px solid #88652f;color:#202923;font-size:14px;line-height:1.7;">
+        <p style="margin:0 0 8px;color:#5f685f;font-size:13px;font-weight:bold;">Message</p>
         {message_html}
       </div>
-      <p style="margin:22px 0 0;"><a href="mailto:{visitor_email}" style="display:inline-block;padding:12px 19px;background:#f2b705;border-radius:4px;color:#171719;font-size:13px;font-weight:bold;text-decoration:none;">Reply to {name}</a></p>
+      <p style="margin:22px 0 0;"><a href="mailto:{visitor_email}" style="display:inline-block;padding:13px 22px;background:#172321;border-radius:2px;color:#ffffff;font-size:14px;font-weight:bold;text-decoration:none;">Reply to {name}</a></p>
     """
     html_body = branded_html_email(
         eyebrow="Website contact form",
@@ -158,9 +158,9 @@ def build_customer_email(contact: ContactRequest, config: SMTPConfig) -> EmailMe
     name = escape(contact.name)
     message_html = escape(contact.message).replace("\n", "<br>")
     summary_html = f"""
-      <p style="margin:0 0 12px;color:#55545a;font-size:13px;line-height:1.6;">A copy of your message:</p>
-      <div style="padding:18px 20px;background:#f7f6f3;border-left:3px solid #f2b705;color:#343338;font-size:14px;line-height:1.7;">{message_html}</div>
-      <p style="margin:20px 0 0;color:#55545a;font-size:13px;line-height:1.6;">For anything time-sensitive, call <a href="tel:+16479288894" style="color:#765800;text-decoration:none;">647-928-8894</a>.</p>
+      <p style="margin:0 0 12px;color:#566159;font-size:14px;line-height:1.6;">A copy of your message:</p>
+      <div style="padding:18px 20px;background:#f5f2ea;border:1px solid #d8d1c4;border-left:3px solid #88652f;color:#202923;font-size:14px;line-height:1.7;">{message_html}</div>
+      <p style="margin:20px 0 0;color:#566159;font-size:14px;line-height:1.6;">For anything time-sensitive, call <a href="tel:+16479288894" style="color:#745526;text-decoration:none;">647-928-8894</a>.</p>
     """
     html_body = branded_html_email(
         eyebrow="We have your message",
@@ -226,7 +226,7 @@ allowed_origins = [
     origin.strip().rstrip("/")
     for origin in os.getenv(
         "FRONTEND_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001",
+        "http://localhost:3000,http://127.0.0.1:3000",
     ).split(",")
     if origin.strip()
 ]

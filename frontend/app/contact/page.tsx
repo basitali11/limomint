@@ -5,8 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { business } from "@/lib/data";
 
-const CONTACT_BANNER =
-  "/contact/contact-banner.png";
+const CONTACT_BANNER = "/contact/contact-banner-v2.png";
 
 export const metadata: Metadata = {
   title: `Contact | ${business.name}`,
@@ -34,9 +33,9 @@ export default function ContactPage() {
               <a href={`mailto:${business.email}`} className="inline-flex items-center gap-2 transition-colors hover:text-gold"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0 text-gold"><path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h13A1.5 1.5 0 0 1 18 4.5v.3l-8 5.1-8-5.1v-.3Zm0 2.1 7.5 4.8a1 1 0 0 0 1 0L18 6.6v8.9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5V6.6Z" /></svg>{business.email}</a>
             </div>
           </Reveal>
-          <Reveal delay={120}>
-            <div className="relative h-[70vh] min-h-[420px] w-full overflow-hidden rounded-md">
-              <Image src="/contact/contact-us.jpg" alt="A vehicle used for LimoMint chauffeured rides" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <Reveal delay={120} className="lg:h-[550px]">
+            <div className="relative h-56 w-full overflow-hidden border border-ink-line sm:h-72 lg:h-full lg:min-h-[380px]">
+              <Image src="/contact/contact-scene-v2.png" alt="A chauffeured sedan waiting outside a Toronto hotel" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[100%_center]" />
             </div>
           </Reveal>
         </div>

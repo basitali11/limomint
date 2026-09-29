@@ -43,7 +43,7 @@ export const fleet: FleetCar[] = [
       "Air conditioning and Bluetooth audio",
       "Ideal for short local trips",
     ],
-    images: ["/fleet/economy-sedan.png", "/fleet/economy-sedan.png", "/fleet/economy-sedan.png", "/fleet/economy-sedan.png"],
+    images: ["/fleet/economy-sedan-v2.png"],
   },
   {
     id: "luxury-suv",
@@ -60,7 +60,7 @@ export const fleet: FleetCar[] = [
       "Leather seats and high-end audio",
       "Ideal for business or special occasions",
     ],
-    images: ["/fleet/luxury-suv.png", "/fleet/luxury-suv.png", "/fleet/luxury-suv.png", "/fleet/luxury-suv.png"],
+    images: ["/fleet/luxury-suv-v2.png"],
   },
   {
     id: "premium-roll-royce",
@@ -76,7 +76,7 @@ export const fleet: FleetCar[] = [
       "All-wheel drive available",
       "Great for airport runs and family trips",
     ],
-    images: ["/fleet/premium-roll-royce.png", "/fleet/premium-roll-royce.png", "/fleet/premium-roll-royce.png", "/fleet/premium-roll-royce.png"],
+    images: ["/fleet/premium-suv-v2.png"],
   },
 ];
 

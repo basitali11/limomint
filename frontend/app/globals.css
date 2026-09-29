@@ -5,10 +5,14 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background: #f5f2ea;
 }
 
 body {
   position: relative;
+  color: #202923;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 ::selection {
@@ -17,7 +21,7 @@ body {
 }
 
 .container-x {
-  @apply mx-auto w-full max-w-[1240px] px-6 md:px-10;
+  @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
 }
 
 .eyebrow-rule {
@@ -25,20 +29,34 @@ body {
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center rounded-md bg-gold px-7 py-3 text-sm font-semibold tracking-wide text-ink transition-all duration-300 hover:bg-gold-bright hover:shadow-[0_0_0_1px_#f2b705,0_8px_24px_-8px_rgba(242,183,5,0.6)];
+  @apply inline-flex min-h-12 items-center justify-center rounded-sm bg-forest px-6 py-3 text-sm font-semibold tracking-wide text-white transition-colors duration-200 hover:bg-forest-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink;
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-md border border-ink-line px-7 py-3 text-sm font-semibold tracking-wide text-paper transition-all duration-300 hover:border-gold hover:text-gold;
+  @apply inline-flex min-h-12 items-center justify-center rounded-sm border border-ink-line px-6 py-3 text-sm font-semibold tracking-wide text-paper transition-colors duration-200 hover:border-forest hover:text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
 }
 
 .reveal {
-  opacity: 0;
+  opacity: 1;
 }
 
 .reveal.is-visible {
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.45s ease-out both;
 }
+
+a, button { -webkit-tap-highlight-color: transparent; }
+
+:focus-visible { outline: 2px solid #88652f; outline-offset: 3px; }
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+.eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-gold; }
+
+.section-title { @apply font-display text-3xl leading-tight tracking-[-0.025em] text-paper sm:text-4xl lg:text-[2.75rem]; }
 
 #about,
 #fleet,

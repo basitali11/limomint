@@ -6,8 +6,9 @@ import Reveal from "@/components/Reveal";
 import { fleet, business } from "@/lib/data";
 import { LuggageIcon, PersonIcon } from "@/components/icons";
 
-const FLEET_BANNER =
-  "/fleet/fleet-header.jpg";
+// Use a clean, brand-safe city fleet image; the generated fleet banner had
+// inaccurate lettering on a vehicle grille.
+const FLEET_BANNER = "/service/service-banner-v2.png";
 
 export const metadata: Metadata = {
   title: `Vehicles | ${business.name}`,

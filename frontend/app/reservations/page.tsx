@@ -11,8 +11,7 @@ export const metadata: Metadata = {
   description: `Request a chauffeured ride with ${business.name} in ${business.city}.`,
 };
 
-const RESERVATIONS_BANNER =
-  "/booking/booking-banner.png";
+const RESERVATIONS_BANNER = "/booking/reservation-banner-v2.png";
 
 export default function ReservationsPage() {
   return (
@@ -25,7 +24,7 @@ export default function ReservationsPage() {
       <section id="reservations" className="bg-ink py-14 md:py-20">
         <div className="container-x">
           <Reveal>
-            <div className="mx-auto max-w-3xl rounded-md bg-ink-soft p-4 md:p-8">
+            <div className="mx-auto max-w-4xl border-y border-ink-line bg-ink px-4 py-7 sm:px-8 md:py-10">
               <a href={`https://book.mylimobiz.com/v4/${LIMO_ALIAS}`} data-ores-widget="website" data-ores-alias={LIMO_ALIAS}>
                 Online Reservations
               </a>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ClockIcon, SedanIcon, ShieldIcon } from "@/components/icons";
 import Reveal from "@/components/Reveal";
 
-const ABOUT_IMAGE = "/about/about-section.jpg";
+const ABOUT_IMAGE = "/about/about-story-v2.png";
 
 const steps = [
   {
@@ -25,22 +25,19 @@ const steps = [
 
 export default function About() {
   return (
-    <section id="about" className="border-b border-ink-line bg-ink-soft">
+    <section id="about" className="border-b border-ink-line bg-ink">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative order-1 h-72 sm:h-96 lg:order-2 lg:h-auto lg:min-h-[560px]">
+        <div className="relative order-1 min-h-[300px] sm:min-h-[420px] lg:order-2 lg:min-h-[590px]">
           <Image src={ABOUT_IMAGE} alt="A LimoMint vehicle ready for a chauffeured ride" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-soft/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-ink-soft/20 lg:via-transparent lg:to-transparent" />
         </div>
 
-        <div className="order-2 flex flex-col justify-center px-6 py-12 sm:px-10 sm:py-14 lg:order-1 lg:px-16 lg:py-24">
+        <div className="order-2 flex flex-col justify-center px-5 py-14 sm:px-10 lg:order-1 lg:px-14 lg:py-24 xl:px-20">
           <Reveal>
             <h2 className="font-display text-3xl leading-tight text-paper sm:text-4xl md:text-5xl">
-              A driver for your trip
+              Considered service, from the first mile
             </h2>
             <p className="mt-5 max-w-md leading-relaxed text-paper-dim">
-              LimoMint provides private chauffeur rides across Toronto.
-              Services include trips across town, airport transfers, and
-              hourly bookings, with the business owner behind the wheel.
+              The best journeys feel effortless. We bring a calm, personal approach to airport transfers, city travel, and time-sensitive plans across Toronto.
             </p>
           </Reveal>
 

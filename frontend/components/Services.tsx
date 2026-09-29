@@ -30,23 +30,23 @@ const howItWorks = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-ink py-14 md:py-20 lg:py-24">
+    <section id="services" className="bg-ink py-16 md:py-24 lg:py-28">
       <div className="container-x">
         <Reveal>
           <h2 className="max-w-lg font-display text-4xl leading-tight text-paper md:text-5xl">
-            Rides for the way your day goes
+            A service for every kind of journey
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 items-center gap-10 pb-14 lg:grid-cols-2 lg:gap-20 lg:pb-16">
+        <div className="mt-10 grid grid-cols-1 items-center gap-8 border-t border-ink-line py-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-12">
           <Reveal delay={80}>
-            <div className="relative h-80 w-full overflow-hidden rounded-md sm:h-[420px] lg:h-[460px]">
-              <Image src="/fleet/luxury-sedan.png" alt="LimoMint Sedan Towncar" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain p-2" />
+            <div className="relative h-72 w-full overflow-hidden bg-ink-soft sm:h-[360px] lg:h-[390px]">
+              <Image src="/service/service-experience-v2.png" alt="A chauffeur ready to welcome a passenger to the rear cabin" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </div>
           </Reveal>
           <div>
             <Reveal>
-              <h3 className="font-display text-3xl text-paper md:text-4xl">Booking is simple</h3>
+              <h3 className="font-display text-3xl text-paper md:text-4xl">A clear, personal booking process</h3>
             </Reveal>
             <div className="mt-9 space-y-8">
               {howItWorks.map((step, index) => (
@@ -69,10 +69,10 @@ export default function Services() {
             const Icon = iconMap[service.icon];
             return (
               <Reveal key={service.title} delay={index * 90}>
-                <div className="group h-full rounded-xl border border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-gold/40 hover:bg-ink-card">
-                  <Icon className="h-8 w-8 text-gold transition-transform duration-300 group-hover:-translate-y-0.5" />
-                  <h3 className="mt-6 text-sm font-semibold uppercase tracking-[0.1em] text-paper">{service.title}</h3>
-                  <ul className="mt-4 space-y-2.5">
+                <div className="group h-full border-t border-ink-line py-6 transition-colors duration-200 hover:border-forest sm:px-3">
+                  <Icon className="h-7 w-7 text-gold transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  <h3 className="mt-4 text-sm font-semibold uppercase tracking-[0.1em] text-paper">{service.title}</h3>
+                  <ul className="mt-3 space-y-2.5">
                     {service.points.map((point) => (
                       <li key={point} className="flex items-start gap-2.5 text-xs leading-relaxed text-paper-dim">
                         <CheckGlyph className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />{point}

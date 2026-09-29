@@ -1,145 +1,64 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { business } from "@/lib/data";
 
 const navLinks = [
   { label: "About", href: "/about" },
-  { label: "Fleet", href: "/fleet" },
+  { label: "Vehicles", href: "/fleet" },
   { label: "Services", href: "/services" },
-  // { label: "Locations", href: "/locations" },
-  { label: "FAQ", href: "/faq" },
+  { label: "FAQs", href: "/faq" },
   { label: "Book", href: "/reservations" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    const id = href.replace("/#", "");
-    if (!href.includes("/#") || !document.getElementById(id)) return;
-
-    e.preventDefault();
-
-    if (open) {
-      // wait for the mobile menu's collapse transition to actually
-      // finish (not a guessed delay) before scrolling, so the header's
-      // settled height is used for the scroll-margin offset
-      const menu = mobileMenuRef.current;
-      const onTransitionEnd = (event: TransitionEvent) => {
-        if (event.propertyName !== "max-height") return;
-        menu?.removeEventListener("transitionend", onTransitionEnd);
-        scrollToSection(id);
-      };
-      menu?.addEventListener("transitionend", onTransitionEnd);
-      setOpen(false);
-    } else {
-      scrollToSection(id);
-    }
-  };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => setOpen(false), [pathname]);
+
+  const linkClass = (href: string) => `relative py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${pathname === href ? "text-forest" : "text-paper-dim"}`;
+
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-        scrolled ? "bg-ink/95 backdrop-blur-md" : "bg-ink"
-      }`}
-    >
-      <div className="container-x flex h-16 items-center justify-between gap-4 lg:grid lg:h-20 lg:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" className="shrink-0 font-display text-lg tracking-wide text-paper lg:justify-self-start lg:text-xl">
-          LIMO<span className="text-gold">MINT</span>
+    <header className={`sticky top-0 z-50 border-b border-ink-line transition-shadow duration-200 ${scrolled ? "bg-ink/95 shadow-[0_5px_18px_rgba(25,42,34,0.06)] backdrop-blur-sm" : "bg-ink"}`}>
+      <div className="container-x flex h-[68px] items-center justify-between gap-4 lg:h-[78px]">
+        <Link href="/" aria-label="LimoMint home" className="flex shrink-0 items-center gap-3 text-paper">
+          <span className="font-display text-[22px] font-medium tracking-[0.03em]">LIMO<span className="text-gold">MINT</span></span>
+          <span className="hidden border-l border-ink-line pl-3 text-[9px] font-medium uppercase leading-[1.4] tracking-[0.15em] text-paper-muted sm:block">Private<br />Chauffeur</span>
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden items-center justify-center gap-6 lg:flex lg:justify-self-center xl:gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="group relative whitespace-nowrap text-xs font-semibold uppercase tracking-[0.1em] text-paper-dim transition-colors hover:text-gold"
-            >
-              {link.label}
-              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+        <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex xl:gap-9">
+          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} className={linkClass(link.href)}>{link.label}</Link>)}
         </nav>
 
-        <div className="flex shrink-0 items-center justify-end gap-4 lg:col-start-3 xl:gap-5">
-          <a href={business.phoneHref} className="group hidden items-center gap-2 whitespace-nowrap text-sm tracking-wide text-paper-dim transition-colors hover:text-gold lg:flex">
-            <PhoneGlyph />
-            {business.phone}
-          </a>
-          <Link href="/reservations" className="btn-gold hidden px-5 py-2.5 lg:inline-flex">
-            Book Now
-          </Link>
-          <button
-            aria-label="Toggle menu"
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
-          >
-            <span className={`h-px w-6 bg-paper transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`} />
-            <span className={`h-px w-6 bg-paper transition-opacity duration-300 ${open ? "opacity-0" : "opacity-100"}`} />
-            <span className={`h-px w-6 bg-paper transition-transform duration-300 ${open ? "-translate-y-[5.5px] -rotate-45" : ""}`} />
+        <div className="flex shrink-0 items-center gap-3">
+          <a href={business.phoneHref} className="hidden text-xs font-semibold tracking-wide text-paper transition-colors hover:text-forest xl:block">{business.phone}</a>
+          <Link href="/reservations" className="hidden min-h-11 items-center bg-forest px-5 text-xs font-semibold tracking-wide text-white transition-colors hover:bg-forest-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 md:inline-flex">Book a ride</Link>
+          <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)} className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] border border-ink-line text-paper lg:hidden">
+            <span className={`h-px w-5 bg-current transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
+            <span className={`h-px w-5 bg-current transition-opacity ${open ? "opacity-0" : ""}`} />
+            <span className={`h-px w-5 bg-current transition-transform ${open ? "-translate-y-[9px] -rotate-45" : ""}`} />
           </button>
         </div>
       </div>
-
-      {/* mobile menu */}
-      <div
-        ref={mobileMenuRef}
-        className={`overflow-hidden border-t border-ink-line bg-ink-soft transition-[max-height] duration-300 ease-in-out lg:hidden ${
-          open ? "max-h-96" : "max-h-0"
-        }`}
-      >
-        <nav className="container-x flex flex-col gap-1 py-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="py-2.5 text-sm font-semibold uppercase tracking-[0.12em] text-paper-dim hover:text-gold"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a href={business.phoneHref} className="btn-gold mt-3 w-full">
-            {business.phone}
-          </a>
+      <div id="mobile-navigation" className={`overflow-hidden border-t border-ink-line bg-ink transition-[max-height] duration-300 lg:hidden ${open ? "max-h-[440px]" : "max-h-0 border-t-0"}`}>
+        <nav aria-label="Mobile navigation" className="container-x flex flex-col py-3">
+          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} className="flex min-h-12 items-center border-b border-ink-line/70 text-xs font-semibold uppercase tracking-[0.14em] text-paper-dim transition-colors hover:text-forest">{link.label}</Link>)}
+          <a href={business.phoneHref} className="py-4 text-sm font-semibold text-forest">Call {business.phone}</a>
+          <Link href="/reservations" className="btn-gold mb-3">Book a ride</Link>
         </nav>
       </div>
     </header>
-  );
-}
-
-function PhoneGlyph() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4 text-gold">
-      <path
-        d="M4 3 L7 3 L8.5 6.5 L6.5 8 C7.3 9.8 8.7 11.2 10.5 12 L12 10 L15.5 11.5 L15.5 14.5 C15.5 15.6 14.6 16.5 13.5 16.5 C8.3 16.2 4 12 3.5 6.5 C3.4 5.4 3.3 4.3 4 3 Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

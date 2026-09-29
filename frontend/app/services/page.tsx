@@ -27,8 +27,7 @@ const iconMap = {
   compass: CompassIcon,
 };
 
-const Service_BANNER =
-  "/service/service-banner.png";
+const Service_BANNER = "/service/service-banner-v2.png";
 
 export const metadata: Metadata = {
   title: `Chauffeur Services | ${business.name}`,
@@ -48,7 +47,7 @@ export default function ServicesPage() {
         <div className="container-x grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <div className="relative h-64 w-full overflow-hidden rounded-md sm:h-80">
-              <Image src="/fleet/luxury-sedan.png" alt="A vehicle used for LimoMint chauffeur service" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain p-6" />
+              <Image src="/service/service-experience-v2.png" alt="A chauffeur ready to welcome a passenger to the rear cabin" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </div>
           </Reveal>
           <Reveal delay={100}>

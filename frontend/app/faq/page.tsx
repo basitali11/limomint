@@ -4,8 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import FAQ from "@/components/FAQ";
 import { business } from "@/lib/data";
 
-const FAQ_BANNER =
-  "/faq/faq-header.png";
+const FAQ_BANNER = "/faq/faq-banner-v2.png";
 
 export const metadata: Metadata = {
   title: `FAQs | ${business.name}`,

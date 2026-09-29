@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import { business } from "@/lib/data";
 import { ShieldIcon, ClockIcon, KeyIcon } from "@/components/icons";
 
-const ABOUT_BANNER = "/about/about-header.jpg";
+const ABOUT_BANNER = "/about/about-banner-v2.png";
 
 export const metadata: Metadata = {
   title: `About | ${business.name} Chauffeur Service`,

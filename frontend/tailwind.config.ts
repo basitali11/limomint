@@ -9,25 +9,30 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#0a0a0b",   // primary background
-          soft: "#141416",      // alternating section background
-          card: "#1b1b1e",      // card surface
-          line: "#2a2a2e",      // hairline borders
+          DEFAULT: "#f5f2ea",   // limestone canvas
+          soft: "#ece8de",      // warm section contrast
+          card: "#fffdf8",      // paper surface
+          line: "#d8d1c4",      // warm hairline borders
         },
         gold: {
-          DEFAULT: "#f2b705",
-          dim: "#c99206",
-          bright: "#ffd23f",
+          DEFAULT: "#88652f",   // restrained brass accent
+          dim: "#745526",
+          bright: "#9b773d",
         },
         paper: {
-          DEFAULT: "#f5f4f1",
-          dim: "#c9c9cd",
-          muted: "#8d8d93",
+          DEFAULT: "#202923",   // evergreen charcoal
+          dim: "#566159",
+          muted: "#727b73",
+        },
+        forest: {
+          DEFAULT: "#172321",
+          deep: "#0d1514",
+          light: "#2b3936",
         },
       },
       fontFamily: {
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
-        body: ["var(--font-manrope)", "Helvetica", "Arial", "sans-serif"],
+        display: ["Georgia", "'Times New Roman'", "serif"],
+        body: ["'Avenir Next'", "Avenir", "'Segoe UI'", "Arial", "sans-serif"],
       },
       keyframes: {
         "fade-up": {
@@ -42,16 +47,16 @@ const config: Config = {
           "0%": { transform: "scaleX(0)" },
           "100%": { transform: "scaleX(1)" },
         },
-        "drift": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
+        // "drift": {
+        //   "0%": { transform: "translateX(0)" },
+        //   "100%": { transform: "translateX(-50%)" },
+        // },
       },
       animation: {
         "fade-up": "fade-up 0.8s cubic-bezier(0.16,1,0.3,1) forwards",
         "fade-in": "fade-in 1s ease forwards",
         "grow-x": "grow-x 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
-        "drift-slow": "drift 40s linear infinite",
+        // "drift-slow": "drift 40s linear infinite",
       },
     },
   },
