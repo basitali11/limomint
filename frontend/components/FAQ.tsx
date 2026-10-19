@@ -5,7 +5,7 @@ import { faqs } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import Link from "next/link";
 
-export default function FAQ() {
+export default function FAQ({ items = faqs }: { items?: Array<{ q: string; a: string }> }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -25,7 +25,7 @@ export default function FAQ() {
         </div>
 
         <div className="mt-10 md:mt-12 lg:mt-14 divide-y divide-ink-line border-t border-ink-line">
-          {faqs.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <div key={item.q}>

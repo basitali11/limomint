@@ -5,13 +5,17 @@ import {
   CalendarIcon,
   ClockIcon,
   CompassIcon,
+  HeartIcon,
   KeyIcon,
   MapIcon,
   PersonIcon,
   PlaneIcon,
   ShieldIcon,
+  SwapIcon,
+  VanIcon,
 } from "@/components/icons";
 import Reveal from "@/components/Reveal";
+import type { Service } from "@/lib/data";
 
 const iconMap = {
   calendar: CalendarIcon,
@@ -20,6 +24,9 @@ const iconMap = {
   map: MapIcon,
   shield: ShieldIcon,
   compass: CompassIcon,
+  heart: HeartIcon,
+  swap: SwapIcon,
+  van: VanIcon,
 };
 
 const howItWorks = [
@@ -28,7 +35,7 @@ const howItWorks = [
   { icon: KeyIcon, title: "Wait for Confirmation", text: "LimoMint reviews the request and confirms the ride details." },
 ];
 
-export default function Services() {
+export default function Services({ serviceList = services }: { serviceList?: Service[] }) {
   return (
     <section id="services" className="bg-ink py-16 md:py-24 lg:py-28">
       <div className="container-x">
@@ -65,7 +72,7 @@ export default function Services() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
+          {serviceList.map((service, index) => {
             const Icon = iconMap[service.icon];
             return (
               <Reveal key={service.title} delay={index * 90}>

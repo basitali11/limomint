@@ -5,8 +5,38 @@ export const business = {
   city: "Toronto",
   state: "Ontario",
   address: "350 Victoria St, Toronto, ON M5B 2K3",
+  streetAddress: "350 Victoria St",
+  postalCode: "M5B 2K3",
+  country: "CA",
   email: "waseemtmu1@gmail.com",
 };
+
+export const staticPageDefaults = {
+  aboutPage: {
+    heading: "About Us",
+    intro: "Independent chauffeur service for private rides in Toronto and beyond.",
+  },
+  servicesPage: {
+    heading: "Services",
+    intro: "Airport transfers, appointments, evenings out, and other trips around Toronto.",
+  },
+  fleetPage: {
+    heading: "Fleet and Vehicle Options",
+    intro: "Choose a sedan or SUV for your chauffeured ride.",
+  },
+  faqPage: {
+    heading: "Frequently Asked Questions",
+    intro: `For help with a reservation, call ${business.phone}.`,
+  },
+  contactPage: {
+    heading: "Contact Us",
+    intro: "Have a question or a trip to arrange? Get in touch.",
+  },
+  reservationsPage: {
+    heading: "Book Your Ride",
+    intro: "Submit the trip details for review. LimoMint will confirm the reservation directly.",
+  },
+} as const;
 
 export const stats = [
   { value: 5, suffix: "+", label: "Years Service in Toronto" },
@@ -25,6 +55,7 @@ export type FleetCar = {
   icon: "sedan" | "suv" | "luxury";
   features: string[];
   images: string[];
+  imageAlts?: string[];
 };
 
 export const fleet: FleetCar[] = [
@@ -44,6 +75,7 @@ export const fleet: FleetCar[] = [
       "Ideal for short local trips",
     ],
     images: ["/fleet/economy-sedan-v2.png"],
+    imageAlts: ["Economy sedan available for LimoMint chauffeur rides"],
   },
   {
     id: "luxury-suv",
@@ -61,6 +93,7 @@ export const fleet: FleetCar[] = [
       "Ideal for business or special occasions",
     ],
     images: ["/fleet/luxury-suv-v2.png"],
+    imageAlts: ["Luxury SUV available for LimoMint chauffeur rides"],
   },
   {
     id: "premium-roll-royce",
@@ -77,13 +110,15 @@ export const fleet: FleetCar[] = [
       "Great for airport runs and family trips",
     ],
     images: ["/fleet/premium-suv-v2.png"],
+    imageAlts: ["Premium SUV available for LimoMint chauffeur rides"],
   },
 ];
 
 export type Service = {
   title: string;
-  icon: "calendar" | "briefcase" | "plane" | "map" | "shield" | "compass";
+  icon: "calendar" | "briefcase" | "plane" | "map" | "shield" | "compass" | "heart" | "swap" | "van";
   points: string[];
+  description?: string;
 };
 
 export const services: Service[] = [
@@ -121,7 +156,7 @@ export const services: Service[] = [
 
 export type ServiceCard = {
   title: string;
-  icon: "calendar" | "briefcase" | "plane" | "map" | "heart" | "swap" | "van" | "compass";
+  icon: "calendar" | "briefcase" | "plane" | "map" | "heart" | "swap" | "van" | "compass" | "shield";
   text: string;
 };
 

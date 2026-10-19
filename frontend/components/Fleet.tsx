@@ -3,14 +3,9 @@ import Link from "next/link";
 import { fleet } from "@/lib/data";
 import { GearIcon, LuggageIcon, PersonIcon } from "@/components/icons";
 import Reveal from "@/components/Reveal";
+import type { FleetCar } from "@/lib/data";
 
-const carImages: Record<string, string> = {
-  "economy-sedan": "/fleet/economy-sedan-v2.png",
-  "luxury-suv": "/fleet/luxury-suv-v2.png",
-  "premium-roll-royce": "/fleet/premium-suv-v2.png",
-};
-
-export default function Fleet() {
+export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
   return (
     <section id="fleet" className="bg-ink-soft py-16 md:py-24 lg:py-28">
       <div className="container-x">
@@ -31,14 +26,14 @@ export default function Fleet() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-x-7 sm:grid-cols-2 lg:grid-cols-3 md:mt-14">
-          {fleet.map((car, i) => (
+          {vehicles.map((car, i) => (
             <Reveal key={car.id} delay={i * 90}>
               <article className="group flex h-full flex-col justify-between border-t border-ink-line bg-transparent transition-colors duration-200 hover:border-forest">
                 <div>
                   <div className="relative h-56 w-full overflow-hidden bg-ink">
                     <Image
-                      src={carImages[car.id]}
-                      alt={`${car.name} used for LimoMint chauffeured rides`}
+                      src={car.images[0]}
+                      alt={car.imageAlts?.[0] || `${car.name} shown as a LimoMint chauffeur vehicle`}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"

@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { testimonials } from "@/lib/data";
+import type { Testimonial } from "@/lib/data";
 
 const SLIDE_INTERVAL = 6500;
 const TRANSITION_MS = 700;
 
-export default function Testimonials() {
-  const count = testimonials.length;
-  const slides = [testimonials[count - 1], ...testimonials, testimonials[0]];
+export default function Testimonials({ items = testimonials }: { items?: Testimonial[] }) {
+  const count = items.length;
+  const slides = count ? [items[count - 1], ...items, items[0]] : [];
   const [index, setIndex] = useState(1);
   const [withTransition, setWithTransition] = useState(true);
   const [paused, setPaused] = useState(false);

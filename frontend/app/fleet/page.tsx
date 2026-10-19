@@ -3,25 +3,37 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import FleetGallery from "@/components/FleetGallery";
 import Reveal from "@/components/Reveal";
-import { fleet, business } from "@/lib/data";
+import {pageMetadata} from '@/lib/seo'
+import {getBusinessInfo, getSeoSettings, getStaticPage, getVehicles} from '@/sanity/content'
 import { LuggageIcon, PersonIcon } from "@/components/icons";
 
 // Use a clean, brand-safe city fleet image; the generated fleet banner had
 // inaccurate lettering on a vehicle grille.
 const FLEET_BANNER = "/service/service-banner-v2.png";
 
-export const metadata: Metadata = {
-  title: `Vehicles | ${business.name}`,
-  description: `Explore vehicle types used for ${business.name} chauffeured rides in ${business.city}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, businessInfo, defaults] = await Promise.all([
+    getStaticPage('fleetPage'), getBusinessInfo(), getSeoSettings(),
+  ])
+  return pageMetadata({
+    pathname: '/fleet',
+    fallbackTitle: `Vehicles | ${businessInfo.name}`,
+    fallbackDescription: `Explore vehicle types used for ${businessInfo.name} chauffeured rides in ${businessInfo.city}.`,
+    seo: page.seo,
+    defaults,
+    businessName: businessInfo.name,
+  })
+}
 
-export default function FleetPage() {
+export default async function FleetPage() {
+  const [fleet, page] = await Promise.all([getVehicles(), getStaticPage('fleetPage')]);
   return (
     <>
       <PageHeader
-        title="Fleet and Vehicle Options"
-        subtitle="Choose a sedan or SUV for your chauffeured ride."
+        title={page.heading}
+        subtitle={page.intro}
         image={FLEET_BANNER}
+        pathname="/fleet"
       />
 
       <section className="bg-ink">
@@ -31,7 +43,7 @@ export default function FleetPage() {
               <div className="container-x py-14 md:py-16">
                 <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
                   <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <FleetGallery images={car.images} alt={car.name} size="lg" />
+                  <FleetGallery images={car.images} alt={car.name} imageAlts={car.imageAlts} size="lg" />
                   </div>
 
                   <div className={i % 2 === 1 ? "lg:order-1" : ""}>

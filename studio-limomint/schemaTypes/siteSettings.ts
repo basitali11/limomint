@@ -1,0 +1,38 @@
+import {defineArrayMember, defineField, defineType} from 'sanity'
+
+export const siteSettings = defineType({
+  name: 'siteSettings',
+  title: 'Business information',
+  type: 'document',
+  fields: [
+    defineField({name: 'businessName', title: 'Business name', type: 'string', description: 'The business name shown in the website header, footer, contact details, and Google business information.', validation: (rule) => rule.required()}),
+    defineField({name: 'phone', title: 'Phone number', type: 'string', description: 'The public phone number shown across the website. Use the same number as your business listings.', validation: (rule) => rule.required()}),
+    defineField({name: 'phoneHref', title: 'Phone link (optional)', type: 'string', description: 'Usually leave blank. Only fill this if the clickable phone link needs a different format; otherwise the website creates it from the phone number.'}),
+    defineField({name: 'email', title: 'Public email address', type: 'string', description: 'The email address shown on the contact page and in the website footer.', validation: (rule) => rule.email()}),
+    defineField({name: 'city', title: 'City', type: 'string', description: 'The city shown with the business address and in business information.'}),
+    defineField({name: 'region', title: 'Province or region', type: 'string', description: 'The province or region shown with the business address.'}),
+    defineField({name: 'address', title: 'Full business address', type: 'string', description: 'The complete address used on the website and in Google business information.'}),
+    defineField({name: 'streetAddress', title: 'Street address for Google', type: 'string', description: 'Street and number for Google business information. Leave blank if you do not want to publish a street address.'}),
+    defineField({name: 'postalCode', title: 'Postal code', type: 'string', description: 'Postal code for Google business information.'}),
+    defineField({name: 'country', title: 'Country code', type: 'string', description: 'Two-letter country code used by Google, for example CA for Canada.', initialValue: 'CA'}),
+    defineField({name: 'hideStreetAddress', title: 'Hide street address from Google', type: 'boolean', description: 'Turn this on for a service-area business that does not want its street address shown in search information.', initialValue: false}),
+    defineField({name: 'serviceAreas', title: 'Areas served', type: 'array', description: 'Cities or neighbourhoods where rides are offered; these can appear in Google business information.', of: [defineArrayMember({type: 'string', title: 'Area'})]}),
+    defineField({name: 'open24Hours', title: 'Open 24 hours', type: 'boolean', description: 'Turn this on only if the business genuinely accepts bookings at every hour of every day.', initialValue: false}),
+    defineField({name: 'openingHours', title: 'Opening hours', type: 'array', description: 'Add one entry for each set of days with the same opening and closing times. Leave empty when hours are not confirmed.', of: [defineArrayMember({type: 'object', title: 'Hours', fields: [
+      defineField({name: 'days', title: 'Days open', type: 'array', description: 'Choose at least one day that uses these times.', of: [defineArrayMember({type: 'string', options: {list: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']}})], validation: (rule) => rule.required().min(1)}),
+      defineField({name: 'opens', title: 'Opening time', type: 'string', description: 'Enter the opening time in 24-hour HH:MM format, for example 08:30.', validation: (rule) => rule.custom((value) => !value || /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value) || 'Enter a time from 00:00 to 23:59 in HH:MM format.')}),
+      defineField({name: 'closes', title: 'Closing time', type: 'string', description: 'Enter the closing time in 24-hour HH:MM format, for example 18:00.', validation: (rule) => rule.custom((value) => !value || /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value) || 'Enter a time from 00:00 to 23:59 in HH:MM format.')}),
+    ]})]}),
+    defineField({name: 'priceRange', title: 'Typical price range', type: 'string', description: 'Optional Google price indicator. Choose one to four dollar signs; leave blank until confirmed.', options: {list: [{title: '$', value: '$'}, {title: '$$', value: '$$'}, {title: '$$$', value: '$$$'}, {title: '$$$$', value: '$$$$'}]}}),
+    defineField({name: 'latitude', title: 'Map latitude', type: 'number', description: 'Latitude from the verified business map location, from -90 to 90. Leave blank until confirmed.', validation: (rule) => rule.min(-90).max(90)}),
+    defineField({name: 'longitude', title: 'Map longitude', type: 'number', description: 'Longitude from the verified business map location, from -180 to 180. Leave blank until confirmed.', validation: (rule) => rule.min(-180).max(180)}),
+    defineField({name: 'logo', title: 'Business logo', type: 'image', description: 'The official business logo used in Google business information. Upload a clear, current logo.'}),
+    defineField({name: 'googleBusinessProfileUrl', title: 'Google Business Profile link', type: 'url', description: 'The public link to the verified Google Business Profile. Leave blank until it is available.'}),
+    defineField({name: 'facebookUrl', title: 'Facebook page link', type: 'url', description: 'The official Facebook business page. Leave blank if there is no official page.'}),
+    defineField({name: 'instagramUrl', title: 'Instagram profile link', type: 'url', description: 'The official Instagram business profile. Leave blank if there is no official profile.'}),
+    defineField({name: 'xUrl', title: 'X profile link', type: 'url', description: 'The official business profile on X. Leave blank if there is no official profile.'}),
+    defineField({name: 'linkedinUrl', title: 'LinkedIn page link', type: 'url', description: 'The official LinkedIn business page. Leave blank if there is no official page.'}),
+    defineField({name: 'shortDescription', title: 'Short business description', type: 'text', rows: 3, description: 'A plain description of the business used by the website and search engines. Keep it factual and around 1–2 sentences.'}),
+  ],
+  preview: {select: {title: 'businessName', subtitle: 'city'}, prepare: ({title, subtitle}) => ({title: title || 'Business information', subtitle: subtitle || 'Phone, address, and local business details'})},
+})

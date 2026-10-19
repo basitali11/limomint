@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { business } from "@/lib/data";
+import type { BusinessInfo } from "@/sanity/content";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -14,7 +15,7 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Header() {
+export default function Header({ businessInfo = business }: { businessInfo?: BusinessInfo }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
-          <a href={business.phoneHref} className="hidden text-xs font-semibold tracking-wide text-paper transition-colors hover:text-forest xl:block">{business.phone}</a>
+          <a href={businessInfo.phoneHref} className="hidden text-xs font-semibold tracking-wide text-paper transition-colors hover:text-forest xl:block">{businessInfo.phone}</a>
           <Link href="/reservations" className="hidden min-h-11 items-center bg-forest px-5 text-xs font-semibold tracking-wide text-white transition-colors hover:bg-forest-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 md:inline-flex">Book a ride</Link>
           <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)} className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] border border-ink-line text-paper lg:hidden">
             <span className={`h-px w-5 bg-current transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
@@ -54,9 +55,9 @@ export default function Header() {
       </div>
       <div id="mobile-navigation" className={`overflow-hidden border-t border-ink-line bg-ink transition-[max-height] duration-300 lg:hidden ${open ? "max-h-[440px]" : "max-h-0 border-t-0"}`}>
         <nav aria-label="Mobile navigation" className="container-x flex flex-col py-3">
-          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} className="flex min-h-12 items-center border-b border-ink-line/70 text-xs font-semibold uppercase tracking-[0.14em] text-paper-dim transition-colors hover:text-forest">{link.label}</Link>)}
-          <a href={business.phoneHref} className="py-4 text-sm font-semibold text-forest">Call {business.phone}</a>
-          <Link href="/reservations" className="btn-gold mb-3">Book a ride</Link>
+          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} tabIndex={open ? 0 : -1} className="flex min-h-12 items-center border-b border-ink-line/70 text-xs font-semibold uppercase tracking-[0.14em] text-paper-dim transition-colors hover:text-forest">{link.label}</Link>)}
+          <a href={businessInfo.phoneHref} tabIndex={open ? 0 : -1} className="py-4 text-sm font-semibold text-forest">Call {businessInfo.phone}</a>
+          <Link href="/reservations" tabIndex={open ? 0 : -1} className="btn-gold mb-3">Book a ride</Link>
         </nav>
       </div>
     </header>

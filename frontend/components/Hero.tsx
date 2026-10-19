@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { business } from "@/lib/data";
+import type { BusinessInfo, HomePageContent } from "@/sanity/content";
 
 const HERO_IMAGE = "/hero/limomint-hero.png";
 
-export default function Hero() {
+export default function Hero({ content, businessInfo = business }: { content?: HomePageContent | null; businessInfo?: BusinessInfo }) {
   return (
     <section className="relative isolate flex min-h-[680px] items-center overflow-hidden bg-forest-deep text-white sm:min-h-[740px] lg:min-h-[calc(100svh-78px)]">
       <Image
-        src={HERO_IMAGE}
-        alt="A chauffeur vehicle outside a hotel at evening"
+        src={content?.heroImage || HERO_IMAGE}
+        alt={content?.heroImageAlt || "A chauffeur vehicle outside a hotel at evening"}
         fill
         priority
         sizes="100vw"
@@ -20,20 +21,19 @@ export default function Hero() {
 
       <div className="container-x w-full py-16 sm:py-20 lg:py-24">
         <div className="max-w-[610px]">
-          <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d8bd8a]">
-          </p>
+          {content?.eyebrow && <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d8bd8a]">{content.eyebrow}</p>}
           <h1 className="max-w-[11ch] font-display text-[2.85rem] leading-[1.03] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.5rem]">
-            Arrive well. <span className="italic text-[#d8bd8a]">Travel with ease.</span>
+            {content?.headline || "Arrive well."} <span className="italic text-[#d8bd8a]">{content?.headlineAccent || "Travel with ease."}</span>
           </h1>
           <p className="mt-6 max-w-[460px] text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
-            A dedicated driver for airport transfers, city appointments, and the occasions that deserve a little more care.
+            {content?.description || "A dedicated driver for airport transfers, city appointments, and the occasions that deserve a little more care."}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
             <Link href="/reservations" className="inline-flex min-h-12 items-center bg-[#c1a16b] px-6 py-3 text-sm font-semibold text-[#171d1b] transition-colors hover:bg-[#d2b984] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-forest-deep">
-              Arrange a ride
+              {content?.primaryCtaLabel || "Arrange a ride"}
             </Link>
-            <a href={business.phoneHref} className="inline-flex min-h-12 items-center px-4 py-3 text-sm font-semibold text-white transition-colors hover:text-[#e2cb9f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
-              Call {business.phone}
+            <a href={businessInfo.phoneHref} className="inline-flex min-h-12 items-center px-4 py-3 text-sm font-semibold text-white transition-colors hover:text-[#e2cb9f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+              Call {businessInfo.phone}
             </a>
           </div>
         </div>

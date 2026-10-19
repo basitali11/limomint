@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { business } from "@/lib/data";
+import type { BusinessInfo, LocationPageSummary } from "@/sanity/content";
 
 const footerLinks = [
   { label: "About US", href: "/about" },
@@ -26,16 +27,16 @@ function SocialLinks() {
   );
 }
 
-export default function Footer() {
+export default function Footer({ businessInfo = business, locationPages = [] }: { businessInfo?: BusinessInfo; locationPages?: LocationPageSummary[] }) {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    business.address
+    businessInfo.address
   )}&output=embed`;
 
   return (
     <footer className="border-t-2 border-gold bg-ink-soft">
       <div className="container-x grid gap-10 py-12 md:grid-cols-2 md:gap-12 lg:grid-cols-[1.05fr_1.15fr_0.8fr] lg:gap-16 lg:py-16">
         <div className="flex flex-col items-start">
-          <Link href="/" className="font-display text-2xl tracking-wide text-paper">LIMO<span className="text-gold">MINT</span></Link>
+          <Link href="/" className="font-display text-2xl tracking-wide text-paper">{businessInfo.name}</Link>
           <p className="mt-4 max-w-sm text-sm leading-7 text-paper-dim">LimoMint delivers dependable chauffeur experiences that bring comfort, confidence, and care to every journey.</p>
           <Link href="/reservations" className="mt-5 text-sm font-semibold text-gold transition-colors hover:text-gold-bright">Plan your next ride <span aria-hidden="true">→</span></Link>
         </div>
@@ -43,12 +44,12 @@ export default function Footer() {
         <section aria-labelledby="footer-contact-heading" className="min-w-0">
           <h2 id="footer-contact-heading" className="text-sm font-semibold uppercase tracking-[0.16em] text-paper">Contact</h2>
           <address className="mt-4 space-y-3 text-sm not-italic leading-6 text-paper-dim">
-            <p className="flex items-start gap-2"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-gold"><path d="M10 1.5a6 6 0 0 0-6 6c0 4.3 6 11 6 11s6-6.7 6-11a6 6 0 0 0-6-6Zm0 8.25a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5Z" /></svg><span>{business.address}</span></p>
-            <a href={business.phoneHref} className="flex items-center gap-2 transition-colors hover:text-gold"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0 text-gold"><path d="M3.4 1.8 6.2 1a1 1 0 0 1 1.2.6l1.2 3a1 1 0 0 1-.3 1.1L6.7 7a12.4 12.4 0 0 0 6.3 6.3l1.3-1.6a1 1 0 0 1 1.1-.3l3 1.2a1 1 0 0 1 .6 1.2l-.8 2.8a1 1 0 0 1-1 .7C8.1 17.3 2.7 11.9 2.7 2.8a1 1 0 0 1 .7-1Z" /></svg><span>{business.phone}</span></a>
-            <a href={`mailto:${business.email}`} className="flex items-center gap-2 break-all transition-colors hover:text-gold"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0 text-gold"><path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h13A1.5 1.5 0 0 1 18 4.5v.3l-8 5.1-8-5.1v-.3Zm0 2.1 7.5 4.8a1 1 0 0 0 1 0L18 6.6v8.9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5V6.6Z" /></svg><span>{business.email}</span></a>
+            <p className="flex items-start gap-2"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-gold"><path d="M10 1.5a6 6 0 0 0-6 6c0 4.3 6 11 6 11s6-6.7 6-11a6 6 0 0 0-6-6Zm0 8.25a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5Z" /></svg><span>{businessInfo.address}</span></p>
+            <a href={businessInfo.phoneHref} className="flex items-center gap-2 transition-colors hover:text-gold"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0 text-gold"><path d="M3.4 1.8 6.2 1a1 1 0 0 1 1.2.6l1.2 3a1 1 0 0 1-.3 1.1L6.7 7a12.4 12.4 0 0 0 6.3 6.3l1.3-1.6a1 1 0 0 1 1.1-.3l3 1.2a1 1 0 0 1 .6 1.2l-.8 2.8a1 1 0 0 1-1 .7C8.1 17.3 2.7 11.9 2.7 2.8a1 1 0 0 1 .7-1Z" /></svg><span>{businessInfo.phone}</span></a>
+            <a href={`mailto:${businessInfo.email}`} className="flex items-center gap-2 break-all transition-colors hover:text-gold"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0 text-gold"><path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h13A1.5 1.5 0 0 1 18 4.5v.3l-8 5.1-8-5.1v-.3Zm0 2.1 7.5 4.8a1 1 0 0 0 1 0L18 6.6v8.9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5V6.6Z" /></svg><span>{businessInfo.email}</span></a>
           </address>
           <div className="mt-5 h-36 overflow-hidden rounded-sm border border-ink-line">
-            <iframe title={`${business.name} location in ${business.city}`} src={mapSrc} className="h-full w-full" loading="lazy" style={{ border: 0 }} />
+            <iframe title={`${businessInfo.name} location in ${businessInfo.city}`} src={mapSrc} className="h-full w-full" loading="lazy" style={{ border: 0 }} />
           </div>
         </section>
 
@@ -61,12 +62,24 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          {locationPages.length > 0 && (
+            <section aria-labelledby="footer-areas-heading" className="mt-8">
+              <h3 id="footer-areas-heading" className="text-sm font-semibold uppercase tracking-[0.16em] text-paper">Areas we serve</h3>
+              <ul className="mt-4 space-y-3">
+                {locationPages.map((location) => (
+                  <li key={location.slug}>
+                    <Link href={`/locations/${location.slug}`} className="flex items-center gap-2 text-sm text-paper-dim transition-colors hover:text-gold"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="h-3 w-3 shrink-0"><path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>{location.areaName || location.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </nav>
       </div>
 
       <div className="border-t border-ink-line bg-ink">
         <div className="container-x flex flex-col items-center justify-between gap-4 py-5 text-xs text-paper-muted sm:flex-row">
-          <p>© {new Date().getFullYear()} {business.name}. All rights reserved. <span className="mx-1 text-ink-line">|</span> Serving {business.city} and surrounding areas.</p>
+          <p>© {new Date().getFullYear()} {businessInfo.name}. All rights reserved. <span className="mx-1 text-ink-line">|</span> Serving {businessInfo.city} and surrounding areas.</p>
           <SocialLinks />
         </div>
       </div>

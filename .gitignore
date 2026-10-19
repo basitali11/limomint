@@ -1,0 +1,5 @@
+limo-old-image
+.playwright-mcp/
+frontend/.e2e/
+*.zip
+*.tar.gz

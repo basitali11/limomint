@@ -2,24 +2,36 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-import { business } from "@/lib/data";
+import {pageMetadata} from '@/lib/seo'
+import {getBusinessInfo, getSeoSettings, getStaticPage} from '@/sanity/content'
 
 const LIMO_ALIAS = "limomint";
 
-export const metadata: Metadata = {
-  title: `Reservations | ${business.name}`,
-  description: `Request a chauffeured ride with ${business.name} in ${business.city}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, businessInfo, defaults] = await Promise.all([
+    getStaticPage('reservationsPage'), getBusinessInfo(), getSeoSettings(),
+  ])
+  return pageMetadata({
+    pathname: '/reservations',
+    fallbackTitle: `Reservations | ${businessInfo.name}`,
+    fallbackDescription: `Request a chauffeured ride with ${businessInfo.name} in ${businessInfo.city}.`,
+    seo: page.seo,
+    defaults,
+    businessName: businessInfo.name,
+  })
+}
 
 const RESERVATIONS_BANNER = "/booking/reservation-banner-v2.png";
 
-export default function ReservationsPage() {
+export default async function ReservationsPage() {
+  const page = await getStaticPage('reservationsPage')
   return (
     <>
       <PageHeader
-        title="Book Your Ride"
-        subtitle="Submit the trip details for review. LimoMint will confirm the reservation directly."
+        title={page.heading}
+        subtitle={page.intro}
         image={RESERVATIONS_BANNER}
+        pathname="/reservations"
       />
       <section id="reservations" className="bg-ink py-14 md:py-20">
         <div className="container-x">

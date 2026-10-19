@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+import type {Metadata} from 'next'
+
+export const metadata: Metadata = {
+  title: 'Page not found | LimoMint',
+  robots: {index: false, follow: false},
+}
+
 export default function NotFound() {
   return (
     <section className="bg-ink py-24 md:py-32">

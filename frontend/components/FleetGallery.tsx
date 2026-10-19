@@ -8,10 +8,12 @@ const AUTO_INTERVAL = 3500;
 export default function FleetGallery({
   images,
   alt,
+  imageAlts,
   size = "sm",
 }: {
   images: string[];
   alt: string;
+  imageAlts?: string[];
   /** "sm" for compact grid cards, "lg" for the full-width fleet listing */
   size?: "sm" | "lg";
 }) {
@@ -70,7 +72,9 @@ export default function FleetGallery({
             <div key={`${cycle}-${src}-${i}`} className="relative h-full w-full shrink-0">
               <Image
                 src={src}
-                alt={i === active % imageCount ? alt : ""}
+                alt={cycle === Math.floor(active / imageCount) && i === active % imageCount
+                  ? imageAlts?.[i] || `${alt} shown as a chauffeur vehicle`
+                  : ""}
                 fill
                 sizes={size === "lg" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
                 className="object-contain p-4"

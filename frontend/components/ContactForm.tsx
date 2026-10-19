@@ -2,10 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { business } from "@/lib/data";
+import type { BusinessInfo } from "@/sanity/content";
 
 const CONTACT_API_URL = (process.env.NEXT_PUBLIC_CONTACT_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
-export default function ContactForm() {
+export default function ContactForm({ businessInfo = business }: { businessInfo?: BusinessInfo }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [confirmationEmailSent, setConfirmationEmailSent] = useState(false);
 
@@ -57,7 +58,7 @@ export default function ContactForm() {
           ) : (
             <>
               Your enquiry reached LimoMint, but the confirmation email could not be sent. Please check that your email address is correct, or call{" "}
-              <a href={business.phoneHref} className="whitespace-nowrap text-gold transition-colors hover:text-gold-bright">{business.phone}</a>.
+              <a href={businessInfo.phoneHref} className="whitespace-nowrap text-gold transition-colors hover:text-gold-bright">{businessInfo.phone}</a>.
             </>
           )}
         </p>

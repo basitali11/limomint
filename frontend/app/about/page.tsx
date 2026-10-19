@@ -3,15 +3,25 @@ import PageHeader from "@/components/PageHeader";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
-import { business } from "@/lib/data";
+import {pageMetadata} from '@/lib/seo'
+import {getBusinessInfo, getSeoSettings, getStaticPage} from '@/sanity/content'
 import { ShieldIcon, ClockIcon, KeyIcon } from "@/components/icons";
 
 const ABOUT_BANNER = "/about/about-banner-v2.png";
 
-export const metadata: Metadata = {
-  title: `About | ${business.name} Chauffeur Service`,
-  description: `Learn about ${business.name} and its chauffeur service in ${business.city}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, businessInfo, defaults] = await Promise.all([
+    getStaticPage('aboutPage'), getBusinessInfo(), getSeoSettings(),
+  ])
+  return pageMetadata({
+    pathname: '/about',
+    fallbackTitle: `About | ${businessInfo.name} Chauffeur Service`,
+    fallbackDescription: `Learn about ${businessInfo.name} and its chauffeur service in ${businessInfo.city}.`,
+    seo: page.seo,
+    defaults,
+    businessName: businessInfo.name,
+  })
+}
 
 const values = [
   {
@@ -31,13 +41,15 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const page = await getStaticPage('aboutPage')
   return (
     <>
       <PageHeader
-        title="About Us"
-        subtitle="Independent chauffeur service for private rides in Toronto and beyond."
+        title={page.heading}
+        subtitle={page.intro}
         image={ABOUT_BANNER}
+        pathname="/about"
       />
       <About />
       <section className="bg-ink py-14 md:py-20">

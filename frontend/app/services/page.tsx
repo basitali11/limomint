@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-import { business, serviceCards } from "@/lib/data";
+import {pageMetadata} from '@/lib/seo'
+import {getBusinessInfo, getSeoSettings, getServiceCards, getStaticPage} from '@/sanity/content'
 import {
   ArrowRightIcon,
   BriefcaseIcon,
@@ -14,6 +15,7 @@ import {
   PlaneIcon,
   SwapIcon,
   VanIcon,
+  ShieldIcon,
 } from "@/components/icons";
 
 const iconMap = {
@@ -25,22 +27,34 @@ const iconMap = {
   swap: SwapIcon,
   van: VanIcon,
   compass: CompassIcon,
+  shield: ShieldIcon,
 };
 
 const Service_BANNER = "/service/service-banner-v2.png";
 
-export const metadata: Metadata = {
-  title: `Chauffeur Services | ${business.name}`,
-  description: `Point-to-point rides, airport transfers, hourly service, and business travel with ${business.name} in ${business.city}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, businessInfo, defaults] = await Promise.all([
+    getStaticPage('servicesPage'), getBusinessInfo(), getSeoSettings(),
+  ])
+  return pageMetadata({
+    pathname: '/services',
+    fallbackTitle: `Chauffeur Services | ${businessInfo.name}`,
+    fallbackDescription: `Point-to-point rides, airport transfers, hourly service, and business travel with ${businessInfo.name} in ${businessInfo.city}.`,
+    seo: page.seo,
+    defaults,
+    businessName: businessInfo.name,
+  })
+}
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [serviceCards, page] = await Promise.all([getServiceCards(), getStaticPage('servicesPage')]);
   return (
     <>
       <PageHeader
-        title="Services"
-        subtitle="Airport transfers, appointments, evenings out, and other trips around Toronto."
+        title={page.heading}
+        subtitle={page.intro}
         image={Service_BANNER}
+        pathname="/services"
       />
 
       <section className="border-ink-line bg-ink-soft py-14 md:py-20">

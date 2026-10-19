@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { business } from "@/lib/data";
+import type { BusinessInfo } from "@/sanity/content";
 import Reveal from "@/components/Reveal";
 import Link from "next/link";
 
 const OFFER_IMAGE = "/booking/ride-callout-v2.png";
 
-export default function OfferBanner() {
+export default function OfferBanner({ businessInfo = business }: { businessInfo?: BusinessInfo }) {
   return (
     <section
       id="contact"
@@ -17,7 +18,7 @@ export default function OfferBanner() {
         <div className="relative min-h-[240px] overflow-hidden sm:min-h-[300px] lg:min-h-[390px]">
           <Image
             src={OFFER_IMAGE}
-            alt="A vehicle ready for a private ride"
+            alt="A LimoMint vehicle ready for a private chauffeured ride"
             fill
             sizes="50vw"
             className="object-cover"
@@ -41,7 +42,7 @@ export default function OfferBanner() {
           <Reveal delay={150} className="mt-8">
             <div className="flex flex-wrap gap-3">
               <Link href="/reservations" className="btn-gold">Make a Reservation</Link>
-              <a href={business.phoneHref} className="inline-flex min-h-12 items-center border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Call {business.phone}</a>
+              <a href={businessInfo.phoneHref} className="inline-flex min-h-12 items-center border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Call {businessInfo.phone}</a>
             </div>
           </Reveal>
         </div>
