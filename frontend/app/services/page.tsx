@@ -18,6 +18,8 @@ import {
   ShieldIcon,
 } from "@/components/icons";
 
+export const revalidate = 60
+
 const iconMap = {
   calendar: CalendarIcon,
   briefcase: BriefcaseIcon,

@@ -102,10 +102,13 @@ type CmsService = Service & {description?: string}
 
 async function readSanity<T>(query: string, params: Record<string, unknown> = {}): Promise<T | null> {
   try {
-    return await sanityClient.fetch<T>(query, params, {next: {revalidate: 60}})
+    return await sanityClient.fetch<T>(query, params, {next: {revalidate: 60, tags: ['sanity-content']}})
   } catch (error) {
-    console.error('Sanity content request failed; using the site defaults.', error)
-    return null
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+      console.error('Sanity content request failed during production build; using the site defaults.', error)
+      return null
+    }
+    throw error
   }
 }
 
@@ -253,7 +256,10 @@ export async function getLocationPages(): Promise<LocationPageSummary[]> {
     title, "slug": slug.current, areaName, intro, "updatedAt": _updatedAt,
     "seo": seo{title, description, noIndex}
   }`)
-  return pages || []
+  return (pages || []).flatMap((page) => {
+    const title = page.title?.trim() || page.areaName?.trim()
+    return title ? [{...page, title}] : []
+  })
 }
 
 export async function getLocationPage(slug: string): Promise<LocationPageContent | null> {

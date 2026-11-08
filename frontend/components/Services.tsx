@@ -60,8 +60,8 @@ export default function Services({ serviceList = services }: { serviceList?: Ser
                 <Reveal key={step.title} delay={120 + index * 90}>
                   <div className="flex items-start gap-5">
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-ink-card text-gold"><step.icon className="h-6 w-6" /></span>
-                    <div>
-                      <h4 className="text-sm font-semibold uppercase tracking-[0.12em] text-gold">{step.title}</h4>
+                    <div className="min-w-0">
+                      <h4 className="break-words text-sm font-semibold uppercase tracking-[0.12em] text-gold">{step.title}</h4>
                       <p className="mt-1.5 text-base text-paper-dim">{step.text}</p>
                     </div>
                   </div>

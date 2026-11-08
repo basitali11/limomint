@@ -7,6 +7,8 @@ import {getBusinessInfo, getSeoSettings, getStaticPage} from '@/sanity/content'
 
 const LIMO_ALIAS = "limomint";
 
+export const revalidate = 60
+
 export async function generateMetadata(): Promise<Metadata> {
   const [page, businessInfo, defaults] = await Promise.all([
     getStaticPage('reservationsPage'), getBusinessInfo(), getSeoSettings(),

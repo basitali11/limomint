@@ -9,25 +9,25 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#f5f2ea",   // limestone canvas
-          soft: "#ece8de",      // warm section contrast
-          card: "#fffdf8",      // paper surface
-          line: "#d8d1c4",      // warm hairline borders
+          DEFAULT: "#151515",   // charcoal page background
+          soft: "#2b2b2b",      // raised section surface
+          card: "#202020",      // input and inset surface
+          line: "#6b6b6b",      // visible borders against dark inputs and surfaces
         },
         gold: {
-          DEFAULT: "#88652f",   // restrained brass accent
-          dim: "#745526",
-          bright: "#9b773d",
+          DEFAULT: "#ff7355",   // readable orange-red accent
+          dim: "#ef684d",
+          bright: "#ff8066",
         },
         paper: {
-          DEFAULT: "#202923",   // evergreen charcoal
-          dim: "#566159",
-          muted: "#727b73",
+          DEFAULT: "#ffffff",   // primary text
+          dim: "#c2c2c2",       // secondary text
+          muted: "#a3a3a3",     // muted labels and placeholders
         },
         forest: {
-          DEFAULT: "#172321",
-          deep: "#0d1514",
-          light: "#2b3936",
+          DEFAULT: "#d93d20",   // primary action; white text contrast 4.5:1
+          deep: "#111111",
+          light: "#c7361c",
         },
       },
       fontFamily: {

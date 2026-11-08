@@ -7,13 +7,14 @@ import {getBusinessInfo, getLocationPages, getSeoSettings} from '@/sanity/conten
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [businessInfo, defaults] = await Promise.all([getBusinessInfo(), getSeoSettings()])
+  const [businessInfo, defaults, locations] = await Promise.all([getBusinessInfo(), getSeoSettings(), getLocationPages()])
   return pageMetadata({
     pathname: '/locations',
     fallbackTitle: `Areas We Serve | ${businessInfo.name}`,
     fallbackDescription: `Browse published service area pages from ${businessInfo.name}.`,
     defaults,
     businessName: businessInfo.name,
+    noIndex: locations.length === 0,
   })
 }
 

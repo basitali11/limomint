@@ -9,6 +9,8 @@ import OfferBanner from "@/components/OfferBanner";
 import {pageMetadata} from '@/lib/seo'
 import {getBusinessInfo, getHomePageContent, getSeoSettings, getServices, getTestimonials, getVehicles} from '@/sanity/content'
 
+export const revalidate = 60
+
 export async function generateMetadata(): Promise<Metadata> {
   const [homePage, businessInfo, seoSettings] = await Promise.all([
     getHomePageContent(), getBusinessInfo(), getSeoSettings(),

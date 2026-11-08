@@ -10,6 +10,8 @@ import {getBusinessInfo, getFaqs, getSeoSettings, getStaticPage} from '@/sanity/
 
 const FAQ_BANNER = "/faq/faq-banner-v2.png";
 
+export const revalidate = 60
+
 export async function generateMetadata(): Promise<Metadata> {
   const [page, businessInfo, defaults] = await Promise.all([
     getStaticPage('faqPage'), getBusinessInfo(), getSeoSettings(),

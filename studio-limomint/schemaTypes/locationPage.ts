@@ -6,14 +6,15 @@ export const locationPage = defineType({
   title: 'Location page',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Page heading', type: 'string', description: 'The main heading visitors see on this area page. Write a useful, specific heading for people.', validation: (rule) => rule.required()}),
+    defineField({name: 'title', title: 'Page heading', type: 'string', description: 'The main heading visitors see on this area page. Write a useful, specific heading for people.', validation: (rule) => rule.required().custom((value) => !value || value.trim() ? true : 'Enter a page heading that is not only spaces.')}),
     defineField({name: 'slug', title: 'Page address ending', type: 'slug', description: 'The final part of this page address. Generate it from the page heading, then use lowercase words joined by hyphens.', options: {source: 'title', maxLength: 96}, validation: (rule) => rule.required().custom(async (value, context) => {
       const slug = value?.current
       if (!slug) return true
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return 'Use lowercase letters and numbers separated by single hyphens.'
       const currentId = context.document?._id?.replace(/^drafts\./, '')
+      const currentDraftId = currentId ? `drafts.${currentId}` : undefined
       const client = context.getClient({apiVersion: '2026-10-14'})
-      const duplicates = await client.fetch<number>('count(*[_type == "locationPage" && slug.current == $slug && _id != $id])', {slug, id: currentId})
+      const duplicates = await client.fetch<number>('count(*[_type == "locationPage" && slug.current == $slug && _id != $publishedId && _id != $draftId])', {slug, publishedId: currentId, draftId: currentDraftId})
       return duplicates === 0 || 'This page address is already in use.'
     })}),
     defineField({name: 'areaName', title: 'Area name', type: 'string', description: 'The neighbourhood, airport, or city covered by this page.'}),

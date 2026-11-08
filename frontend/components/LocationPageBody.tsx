@@ -58,5 +58,5 @@ export default function LocationPageBody({value}: {value: unknown[]}) {
     },
   }
 
-  return <PortableText value={safePortableText(value)} components={components} />
+  return <div className="min-w-0 break-words"><PortableText value={safePortableText(value)} components={components} /></div>
 }

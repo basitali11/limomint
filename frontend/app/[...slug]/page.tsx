@@ -42,7 +42,7 @@ export default async function RedirectOrNotFound({params}: {params: {slug: strin
   const path = `/${params.slug.join('/')}`
   if (isReservedPath(path)) notFound()
 
-  const match = await getRedirect(path)
+  const match = await getRedirect(path).catch(() => null)
   if (!match || normalizeRedirectPath(match.to) === normalizeRedirectPath(path)) notFound()
 
   if (/^https?:\/\//i.test(match.to) || (match.to.startsWith('/') && !match.to.startsWith('//'))) {

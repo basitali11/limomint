@@ -7,6 +7,8 @@ import {pageMetadata} from '@/lib/seo'
 import {getBusinessInfo, getSeoSettings, getStaticPage} from '@/sanity/content'
 import { ShieldIcon, ClockIcon, KeyIcon } from "@/components/icons";
 
+export const revalidate = 60
+
 const ABOUT_BANNER = "/about/about-banner-v2.png";
 
 export async function generateMetadata(): Promise<Metadata> {

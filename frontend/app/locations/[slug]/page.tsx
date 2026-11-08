@@ -20,11 +20,11 @@ export async function generateMetadata({params}: {params: {slug: string}}): Prom
   const [page, businessInfo, defaults] = await Promise.all([
     getLocationPage(params.slug), getBusinessInfo(), getSeoSettings(),
   ])
-  if (!page) return {title: 'Page not found | LimoMint', robots: {index: false, follow: false}}
+  if (!page || !(page.title?.trim() || page.areaName?.trim())) return {title: 'Page not found | LimoMint', robots: {index: false, follow: false}}
 
   return pageMetadata({
     pathname: `/locations/${page.slug}`,
-    fallbackTitle: `${page.title} | ${businessInfo.name}`,
+    fallbackTitle: `${page.title?.trim() || page.areaName?.trim()} | ${businessInfo.name}`,
     fallbackDescription: page.intro || defaults.defaultDescription,
     seo: page.seo,
     defaults,
@@ -35,27 +35,29 @@ export async function generateMetadata({params}: {params: {slug: string}}): Prom
 export default async function LocationPage({params}: {params: {slug: string}}) {
   const page = await getLocationPage(params.slug)
   if (!page) notFound()
+  const title = page.title?.trim() || page.areaName?.trim()
+  if (!title) notFound()
 
   const faqs = (page.faqs || []).filter((faq) => faq.question?.trim() && faq.answer?.trim())
   const breadcrumbs = [
     {name: 'Home', path: '/'},
     {name: 'Locations', path: '/locations'},
-    {name: page.areaName || page.title, path: `/locations/${page.slug}`},
+    {name: page.areaName?.trim() || title, path: `/locations/${page.slug}`},
   ]
 
   return (
     <>
       {faqs.length > 0 && <JsonLd data={faqJsonLd(faqs.map(({question, answer}) => ({q: question, a: answer})))} />}
       <PageHeader
-        title={page.title}
+        title={title}
         subtitle={page.intro}
         image="/contact/contact-banner-v2.png"
         breadcrumbs={breadcrumbs}
       />
-      <nav aria-label="Breadcrumb" className="container-x py-5 text-sm text-paper-dim">
+      <nav aria-label="Breadcrumb" className="container-x break-words py-5 text-sm text-paper-dim">
         <ol className="flex flex-wrap items-center gap-2">
           {breadcrumbs.map((item, index) => (
-            <li key={item.path} className="flex items-center gap-2">
+            <li key={item.path} className="flex min-w-0 max-w-full items-center gap-2">
               {index > 0 && <span aria-hidden="true">/</span>}
               {index === breadcrumbs.length - 1
                 ? <span aria-current="page" className="text-paper">{item.name}</span>
@@ -66,7 +68,7 @@ export default async function LocationPage({params}: {params: {slug: string}}) {
       </nav>
       <section className="bg-ink py-8 md:py-12">
         <div className="container-x grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(240px,1fr)]">
-          <article className="min-w-0 space-y-6">
+          <article className="min-w-0 space-y-6 break-words">
             {page.body?.length ? <LocationPageBody value={page.body} /> : null}
             {page.highlights?.length ? (
               <section aria-labelledby="location-highlights-heading" className="border-t border-ink-line pt-7">
@@ -78,7 +80,7 @@ export default async function LocationPage({params}: {params: {slug: string}}) {
             ) : null}
             {faqs.length > 0 && (
               <section aria-labelledby="location-faq-heading" className="border-t border-ink-line pt-7">
-                <h2 id="location-faq-heading" className="font-display text-2xl text-paper">Questions about {page.areaName || page.title}</h2>
+                <h2 id="location-faq-heading" className="font-display text-2xl text-paper">Questions about {page.areaName?.trim() || title}</h2>
                 <div className="mt-4 divide-y divide-ink-line">
                   {faqs.map((faq, index) => (
                     <details key={`${index}-${faq.question}`} className="py-4">
@@ -91,7 +93,7 @@ export default async function LocationPage({params}: {params: {slug: string}}) {
             )}
           </article>
           {page.relatedServices?.length ? (
-            <aside aria-labelledby="location-services-heading" className="h-fit border-t border-gold pt-5">
+            <aside aria-labelledby="location-services-heading" className="h-fit min-w-0 break-words border-t border-gold pt-5">
               <h2 id="location-services-heading" className="font-display text-xl text-paper">Related services</h2>
               <ul className="mt-4 space-y-4">
                 {page.relatedServices.map((service) => <li key={service.title} className="text-sm text-paper-dim">{service.title}{service.description && <p className="mt-1 leading-6">{service.description}</p>}</li>)}

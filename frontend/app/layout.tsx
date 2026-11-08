@@ -9,6 +9,8 @@ import {googleVerificationContent, isVercelPreview, shareImageUrl, validGa4Measu
 import {siteUrl} from '@/lib/site'
 import {getBusinessInfo, getLocationPages, getSeoSettings} from '@/sanity/content'
 
+export const revalidate = 60
+
 export async function generateMetadata(): Promise<Metadata> {
   const [businessInfo, seoSettings] = await Promise.all([getBusinessInfo(), getSeoSettings()])
   const verification = googleVerificationContent(seoSettings.googleSiteVerification)

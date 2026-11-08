@@ -18,8 +18,8 @@ export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
               Thoughtful vehicle options, each with a professional driver and room for the details that matter.
             </p>
           </Reveal>
-          <Reveal delay={150}>
-            <Link href="/fleet" className="btn-outline whitespace-nowrap">
+          <Reveal delay={150} className="max-w-full">
+            <Link href="/fleet" className="btn-outline max-w-full text-center">
               Vehicle Details
             </Link>
           </Reveal>
@@ -71,7 +71,7 @@ export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
 
                 <Link
                   href="/reservations"
-                  className="mb-7 mt-6 inline-flex min-h-11 items-center justify-center border border-forest px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-forest transition-colors duration-200 hover:bg-forest hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="mb-7 mt-6 inline-flex min-h-11 items-center justify-center border border-forest px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold transition-colors duration-200 hover:bg-forest hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
                   Reserve
                 </Link>

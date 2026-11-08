@@ -11,6 +11,8 @@ import { LuggageIcon, PersonIcon } from "@/components/icons";
 // inaccurate lettering on a vehicle grille.
 const FLEET_BANNER = "/service/service-banner-v2.png";
 
+export const revalidate = 60
+
 export async function generateMetadata(): Promise<Metadata> {
   const [page, businessInfo, defaults] = await Promise.all([
     getStaticPage('fleetPage'), getBusinessInfo(), getSeoSettings(),
@@ -59,12 +61,12 @@ export default async function FleetPage() {
                       {car.features.map((f) => (
                         <li key={f} className="flex items-start gap-2 text-sm text-paper-dim">
                           <span className="mt-0.5 text-gold">+</span>
-                          {f}
+                          <span className="min-w-0 break-words">{f}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <div className="mt-6 flex items-center gap-6 border-t border-ink-line pt-6">
+                    <div className="mt-6 flex flex-wrap items-center gap-6 border-t border-ink-line pt-6">
                       <span className="flex items-center gap-2 text-sm text-paper-dim">
                         <PersonIcon className="h-4 w-4 text-gold" />
                         {car.seats}

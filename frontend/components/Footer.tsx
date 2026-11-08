@@ -3,7 +3,7 @@ import { business } from "@/lib/data";
 import type { BusinessInfo, LocationPageSummary } from "@/sanity/content";
 
 const footerLinks = [
-  { label: "About US", href: "/about" },
+  { label: "About us", href: "/about" },
   { label: "Fleet", href: "/fleet" },
   { label: "Services", href: "/services" },
   { label: "FAQ", href: "/faq" },

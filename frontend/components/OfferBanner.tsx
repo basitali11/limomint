@@ -28,10 +28,10 @@ export default function OfferBanner({ businessInfo = business }: { businessInfo?
 
         <div className="container-x py-8 md:py-10 lg:mx-0 lg:max-w-none lg:px-10 lg:py-10">
           <Reveal>
-            <p className="eyebrow mb-4 text-[#d3b77f]">
+            <p className="eyebrow mb-4 text-gold">
               A considered journey begins here
             </p>
-            <h2 className="font-display text-4xl leading-tight text-white/30 md:text-5xl">
+            <h2 className="font-display text-4xl leading-tight text-white md:text-5xl">
               Make the journey part of the occasion.
             </h2>
             <p className="mt-4 max-w-md text-paper-dim">

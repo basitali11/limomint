@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const routes: MetadataRoute.Sitemap = []
   if (!home?.seo?.noIndex) routes.push({url: siteUrl('/')})
-  routes.push({url: siteUrl('/locations')})
+  if (locationPages.length) routes.push({url: siteUrl('/locations')})
 
   staticRoutes.forEach(({path}, index) => {
     if (!pages[index]?.seo?.noIndex) routes.push({url: siteUrl(path)})
@@ -37,5 +37,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
-  return routes
+  return Array.from(new Map(routes.map((route) => [route.url, route])).values())
 }
