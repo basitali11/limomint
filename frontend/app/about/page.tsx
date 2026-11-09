@@ -61,15 +61,15 @@ export default async function AboutPage() {
               What matters on your ride
             </h2>
           </Reveal>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-px border-y border-ink-line bg-ink-line sm:grid-cols-3">
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 90}>
-                <div className="h-full rounded-md border border-ink-line bg-ink-soft p-8">
+                <div className="h-full bg-ink px-1 py-8 sm:px-7">
                   <value.icon className="h-8 w-8 text-gold" />
-                  <h3 className="mt-5 text-sm font-semibold uppercase tracking-[0.1em] text-paper">
+                  <h3 className="mt-6 font-display text-xl text-paper">
                     {value.title}
                   </h3>
-                  <p className="mt-2 text-sm text-paper-dim">{value.text}</p>
+                  <p className="mt-3 text-sm leading-7 text-paper-dim">{value.text}</p>
                 </div>
               </Reveal>
             ))}

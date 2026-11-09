@@ -1,23 +1,37 @@
+/* Hallmark · genre: editorial · brand: LimoMint · copy: existing preserved · v2.0.0 */
+/* Existing brand and content retained; layouts refined for readability and mobile use. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --site-background: #151515;
+  --site-text: #ffffff;
+  --selection-background: #ef4422;
+  --selection-text: #111111;
+  --focus-color: #ff7355;
+  --hero-overlay: linear-gradient(90deg, rgba(9,9,9,0.92) 0%, rgba(9,9,9,0.78) 36%, rgba(9,9,9,0.24) 72%, rgba(9,9,9,0.08) 100%);
+  --hero-overlay-desktop: linear-gradient(90deg, rgba(9,9,9,0.88) 0%, rgba(9,9,9,0.70) 34%, rgba(9,9,9,0.12) 75%, rgba(9,9,9,0.02) 100%);
+  --hero-overlay-bottom: linear-gradient(0deg, rgba(9,9,9,0.42) 0%, transparent 55%);
+}
+
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  background: #151515;
+  overflow-x: clip;
+  background: var(--site-background);
 }
 
 body {
   position: relative;
-  color: #ffffff;
+  overflow-x: clip;
+  color: var(--site-text);
   font-size: 16px;
   line-height: 1.65;
 }
 
 ::selection {
-  background-color: #ef4422;
-  color: #111111;
+  background-color: var(--selection-background);
+  color: var(--selection-text);
 }
 
 .container-x {
@@ -50,7 +64,7 @@ main {
 
 a, button { -webkit-tap-highlight-color: transparent; }
 
-:focus-visible { outline: 2px solid #ff7355; outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 3px; }
 
 input:focus-visible,
 textarea:focus-visible,

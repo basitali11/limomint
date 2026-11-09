@@ -9,7 +9,7 @@ export default function FAQ({ items = faqs }: { items?: Array<{ q: string; a: st
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-ink-soft py-14 md:py-20 lg:py-24">
+    <section id="faq" className="bg-ink-soft py-16 md:py-24 lg:py-28">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <Reveal>
@@ -24,18 +24,18 @@ export default function FAQ({ items = faqs }: { items?: Array<{ q: string; a: st
           </Reveal>
         </div>
 
-        <div className="mt-10 md:mt-12 lg:mt-14 divide-y divide-ink-line border-t border-ink-line">
+        <div className="mt-10 divide-y divide-ink-line border-y border-ink-line md:mt-14">
           {items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <div key={item.q}>
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 py-5 text-left"
+                  className="flex w-full items-center justify-between gap-6 min-h-16 py-6 text-left"
                   aria-expanded={isOpen}
                 >
                   <span
-                    className={`text-sm font-semibold uppercase tracking-[0.08em] transition-colors md:text-base ${
+                    className={`text-base font-medium leading-snug transition-colors md:text-lg ${
                       isOpen ? "text-gold" : "text-paper"
                     }`}
                   >
@@ -51,7 +51,7 @@ export default function FAQ({ items = faqs }: { items?: Array<{ q: string; a: st
                   </span>
                 </button>
                 <div
-                  className="grid overflow-hidden transition-all duration-300 ease-in-out"
+                  className="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out motion-reduce:transition-none"
                   style={{
                     gridTemplateRows: isOpen ? "1fr" : "0fr",
                   }}

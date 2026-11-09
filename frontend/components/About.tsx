@@ -47,7 +47,7 @@ export default function About() {
                 <div className="flex items-start gap-5">
                   <step.icon className="h-9 w-9 shrink-0 text-gold" />
                   <div className="min-w-0">
-                    <h3 className="break-words text-sm font-semibold uppercase tracking-[0.1em] text-paper">{step.title}</h3>
+                    <h3 className="break-words text-base font-semibold text-paper">{step.title}</h3>
                     <p className="mt-1 text-sm text-paper-dim">{step.text}</p>
                   </div>
                 </div>

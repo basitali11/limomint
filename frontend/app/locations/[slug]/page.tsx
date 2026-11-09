@@ -16,9 +16,10 @@ export async function generateStaticParams() {
   return pages.map(({slug}) => ({slug}))
 }
 
-export async function generateMetadata({params}: {params: {slug: string}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{slug: string}>}): Promise<Metadata> {
+  const {slug} = await params
   const [page, businessInfo, defaults] = await Promise.all([
-    getLocationPage(params.slug), getBusinessInfo(), getSeoSettings(),
+    getLocationPage(slug), getBusinessInfo(), getSeoSettings(),
   ])
   if (!page || !(page.title?.trim() || page.areaName?.trim())) return {title: 'Page not found | LimoMint', robots: {index: false, follow: false}}
 
@@ -32,8 +33,9 @@ export async function generateMetadata({params}: {params: {slug: string}}): Prom
   })
 }
 
-export default async function LocationPage({params}: {params: {slug: string}}) {
-  const page = await getLocationPage(params.slug)
+export default async function LocationPage({params}: {params: Promise<{slug: string}>}) {
+  const {slug} = await params
+  const page = await getLocationPage(slug)
   if (!page) notFound()
   const title = page.title?.trim() || page.areaName?.trim()
   if (!title) notFound()

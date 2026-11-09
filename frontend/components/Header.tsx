@@ -29,14 +29,14 @@ export default function Header({ businessInfo = business }: { businessInfo?: Bus
 
   useEffect(() => setOpen(false), [pathname]);
 
-  const linkClass = (href: string) => `relative py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${pathname === href ? "text-gold" : "text-paper-dim"}`;
+  const linkClass = (href: string) => `relative py-2 text-sm font-medium transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${pathname === href ? "text-gold" : "text-paper-dim"}`;
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-ink-line transition-shadow duration-200 ${scrolled ? "bg-ink/95 shadow-[0_5px_18px_rgba(0,0,0,0.28)] backdrop-blur-sm" : "bg-ink"}`}>
+    <header className={`sticky top-0 z-50 border-b border-ink-line transition-shadow duration-200 ${scrolled ? "bg-ink/95 shadow-lg backdrop-blur-sm" : "bg-ink"}`}>
       <div className="container-x flex h-[68px] items-center justify-between gap-4 lg:h-[78px]">
         <Link href="/" aria-label="LimoMint home" className="flex shrink-0 items-center gap-3 text-paper">
           <span className="font-display text-[22px] font-medium tracking-[0.03em]">LIMO<span className="text-gold">MINT</span></span>
-          <span className="hidden border-l border-ink-line pl-3 text-[9px] font-medium uppercase leading-[1.4] tracking-[0.15em] text-paper-muted sm:block">Private<br />Chauffeur</span>
+          <span className="hidden border-l border-ink-line pl-3 text-[11px] font-medium leading-tight text-paper-muted sm:block">Private<br />Chauffeur</span>
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex xl:gap-9">
@@ -53,9 +53,9 @@ export default function Header({ businessInfo = business }: { businessInfo?: Bus
           </button>
         </div>
       </div>
-      <div id="mobile-navigation" className={`overflow-hidden border-t border-ink-line bg-ink transition-[max-height] duration-300 lg:hidden ${open ? "max-h-[440px]" : "max-h-0 border-t-0"}`}>
+      <div id="mobile-navigation" className={`overflow-hidden border-t border-ink-line bg-ink lg:hidden ${open ? "max-h-[440px]" : "max-h-0 border-t-0"}`}>
         <nav aria-label="Mobile navigation" className="container-x flex flex-col py-3">
-          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} tabIndex={open ? 0 : -1} className="flex min-h-12 items-center border-b border-ink-line/70 text-xs font-semibold uppercase tracking-[0.14em] text-paper-dim transition-colors hover:text-gold">{link.label}</Link>)}
+          {navLinks.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} tabIndex={open ? 0 : -1} className="flex min-h-12 items-center border-b border-ink-line/70 text-base font-medium text-paper-dim transition-colors hover:text-gold">{link.label}</Link>)}
           <a href={businessInfo.phoneHref} tabIndex={open ? 0 : -1} className="py-4 text-sm font-semibold text-gold">Call {businessInfo.phone}</a>
           <Link href="/reservations" tabIndex={open ? 0 : -1} className="btn-gold mb-3">Book a ride</Link>
         </nav>

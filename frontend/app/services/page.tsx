@@ -80,18 +80,19 @@ export default async function ServicesPage() {
 
       <section className="bg-ink py-14 md:py-20">
         <div className="container-x">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <h2 className="font-display text-3xl text-paper md:text-4xl">Our services</h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-6">
             {serviceCards.map((service, index) => {
               const Icon = iconMap[service.icon];
               return (
                 <Reveal key={service.title} delay={index * 70}>
-                  <div className="flex h-full flex-col justify-between rounded-md border border-ink-line bg-ink-soft p-6 transition-colors duration-300 hover:border-gold/40 hover:bg-ink-card">
+                  <div className="flex h-full flex-col justify-between border border-ink-line/70 bg-ink-card p-7 transition-colors duration-300 hover:border-gold/70 hover:bg-ink-soft sm:p-8">
                     <div>
                       <Icon className="h-7 w-7 text-gold" />
-                      <h3 className="mt-5 text-sm font-semibold uppercase tracking-[0.1em] text-paper">{service.title}</h3>
-                      <p className="mt-2 text-xs leading-relaxed text-paper-dim">{service.text}</p>
+                      <h3 className="mt-7 font-display text-2xl leading-tight text-paper">{service.title}</h3>
+                      <p className="mt-3 text-sm leading-7 text-paper-dim">{service.text}</p>
                     </div>
-                    <Link href="/reservations" aria-label={`Ask about ${service.title}`} className="group mt-6 flex h-9 w-9 items-center justify-center self-end rounded-sm border border-ink-line text-gold transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-ink">
+                    <Link href="/reservations" aria-label={`Ask about ${service.title}`} className="group mt-8 flex h-11 w-11 items-center justify-center self-end rounded-sm border border-ink-line text-gold transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-ink">
                       <ArrowRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </Link>
                   </div>

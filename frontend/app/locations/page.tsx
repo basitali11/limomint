@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import type {Metadata} from 'next'
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
@@ -37,7 +38,7 @@ export default async function LocationsPage() {
                     <Link href={`/locations/${location.slug}`} className="transition-colors hover:text-gold">{location.areaName || location.title}</Link>
                   </h2>
                   {location.intro && <p className="mt-3 text-sm leading-7 text-paper-dim">{location.intro}</p>}
-                  <Link href={`/locations/${location.slug}`} className="mt-4 inline-flex text-sm font-semibold text-gold transition-colors hover:text-gold-bright">View area details <span className="ml-2" aria-hidden="true">→</span></Link>
+                  <Link href={`/locations/${location.slug}`} className="mt-4 inline-flex items-center text-sm font-semibold text-gold transition-colors hover:text-gold-bright">View area details <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" /></Link>
                 </li>
               ))}
             </ul>

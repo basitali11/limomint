@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { Check } from "lucide-react";
 import { business } from "@/lib/data";
 import type { BusinessInfo } from "@/sanity/content";
 
@@ -48,11 +49,9 @@ export default function ContactForm({ businessInfo = business }: { businessInfo?
     return (
       <div role="status" aria-live="polite" className="rounded-md border border-gold/30 bg-ink-soft p-6 sm:p-8">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/10 text-gold">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-6 w-6">
-            <path d="m5 12.5 4.5 4.5L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <Check aria-hidden="true" className="h-6 w-6" />
         </div>
-        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-gold">Message received</p>
+        <p className="mt-5 text-sm font-semibold text-gold">Message received</p>
         <h3 className="mt-2 font-display text-3xl text-paper">Thank you for reaching out.</h3>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-paper-dim">
           Your enquiry has been sent to LimoMint. A reply will follow as soon as possible.
@@ -84,7 +83,7 @@ export default function ContactForm({ businessInfo = business }: { businessInfo?
         <button type="submit" disabled={status === "sending"} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
           {status === "sending" ? "Sending..." : "Send Message"}
         </button>
-        {status === "error" && <p aria-live="polite" role="status" className="text-sm text-red-700">Your message could not be sent. Please try again or contact LimoMint by phone.</p>}
+        {status === "error" && <p aria-live="polite" role="status" className="bg-paper px-4 py-3 text-sm text-red-700">Your message could not be sent. Please try again or contact LimoMint by phone.</p>}
       </form>
     </>
   );

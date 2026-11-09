@@ -28,7 +28,7 @@ export default function OfferBanner({ businessInfo = business }: { businessInfo?
 
         <div className="container-x py-8 md:py-10 lg:mx-0 lg:max-w-none lg:px-10 lg:py-10">
           <Reveal>
-            <p className="eyebrow mb-4 text-gold">
+            <p className="mb-4 text-sm font-medium text-gold">
               A considered journey begins here
             </p>
             <h2 className="font-display text-4xl leading-tight text-white md:text-5xl">

@@ -41,7 +41,7 @@ export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
                   </div>
 
                   <div className="pt-5">
-                    <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-paper">
+                    <h3 className="text-base font-semibold text-paper">
                       {car.name}
                     </h3>
 
@@ -49,7 +49,7 @@ export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
                       <span className="font-display text-2xl text-paper">
                         ${car.pricePerHour}
                       </span>
-                      <span className="text-[11px] uppercase tracking-wide text-gold">/ Hour</span>
+                      <span className="text-xs text-gold">/ Hour</span>
                     </div>
 
                     <ul className="mt-5 space-y-2 border-t border-ink-line pt-5">
@@ -71,7 +71,7 @@ export default function Fleet({ vehicles = fleet }: { vehicles?: FleetCar[] }) {
 
                 <Link
                   href="/reservations"
-                  className="mb-7 mt-6 inline-flex min-h-11 items-center justify-center border border-forest px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold transition-colors duration-200 hover:bg-forest hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="mb-7 mt-6 inline-flex min-h-11 items-center justify-center border border-forest px-5 py-2.5 text-sm font-semibold text-gold transition-colors duration-200 hover:bg-forest hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
                   Reserve
                 </Link>

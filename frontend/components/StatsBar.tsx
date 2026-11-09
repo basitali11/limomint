@@ -65,7 +65,7 @@ function StatItem({ value, suffix, label, inView, index }: {
   return (
     <div className="flex flex-col items-center border-ink-line text-center sm:border-l sm:first:border-l-0" style={{ transitionDelay: `${index * 80}ms` }}>
       <span className="font-display text-5xl text-paper md:text-6xl">{count}<span className="text-gold">{suffix}</span></span>
-      <span className="mt-2 text-xs font-semibold uppercase tracking-[0.15em] text-paper-muted">{label}</span>
+      <span className="mt-2 text-sm font-medium text-paper-muted">{label}</span>
     </div>
   );
 }

@@ -42,20 +42,20 @@ export default async function FleetPage() {
         <div>
           {fleet.map((car, i) => (
             <Reveal key={car.id} delay={i * 60}>
-              <div className="container-x py-14 md:py-16">
+              <div className="container-x py-16 md:py-20">
                 <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
                   <div className={i % 2 === 1 ? "lg:order-2" : ""}>
                   <FleetGallery images={car.images} alt={car.name} imageAlts={car.imageAlts} size="lg" />
                   </div>
 
                   <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                      <h2 className="font-display text-4xl text-paper md:text-5xl">
+                      <h2 className="font-display text-3xl leading-tight text-paper md:text-5xl">
                       {car.name}
                     </h2>
-                    <p className="mt-2 text-sm text-gold">
+                    <p className="mt-3 text-base text-gold">
                       {car.tagline}
                     </p>
-                    <p className="mt-3 text-sm uppercase tracking-wide text-paper-dim">${car.pricePerHour} / hour</p>
+                    <p className="mt-5 text-sm font-medium text-paper-dim">${car.pricePerHour} / hour</p>
 
                     <ul className="mt-6 space-y-2">
                       {car.features.map((f) => (

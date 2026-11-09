@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import Image from "next/image";
 import { services } from "@/lib/data";
 import {
@@ -61,7 +62,7 @@ export default function Services({ serviceList = services }: { serviceList?: Ser
                   <div className="flex items-start gap-5">
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-ink-card text-gold"><step.icon className="h-6 w-6" /></span>
                     <div className="min-w-0">
-                      <h4 className="break-words text-sm font-semibold uppercase tracking-[0.12em] text-gold">{step.title}</h4>
+                      <h4 className="break-words text-base font-semibold text-gold">{step.title}</h4>
                       <p className="mt-1.5 text-base text-paper-dim">{step.text}</p>
                     </div>
                   </div>
@@ -78,11 +79,11 @@ export default function Services({ serviceList = services }: { serviceList?: Ser
               <Reveal key={service.title} delay={index * 90}>
                 <div className="group h-full border-t border-ink-line py-6 transition-colors duration-200 hover:border-forest sm:px-3">
                   <Icon className="h-7 w-7 text-gold transition-transform duration-300 group-hover:-translate-y-0.5" />
-                  <h3 className="mt-4 text-sm font-semibold uppercase tracking-[0.1em] text-paper">{service.title}</h3>
+                  <h3 className="mt-4 text-base font-semibold text-paper">{service.title}</h3>
                   <ul className="mt-3 space-y-2.5">
                     {service.points.map((point) => (
                       <li key={point} className="flex items-start gap-2.5 text-xs leading-relaxed text-paper-dim">
-                        <CheckGlyph className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />{point}
+                        <Check aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />{point}
                       </li>
                     ))}
                   </ul>
@@ -94,8 +95,4 @@ export default function Services({ serviceList = services }: { serviceList?: Ser
       </div>
     </section>
   );
-}
-
-function CheckGlyph({ className = "" }: { className?: string }) {
-  return <svg viewBox="0 0 16 16" fill="none" className={className}><path d="M3 8.5 L6.2 11.5 L13 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }

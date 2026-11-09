@@ -23,7 +23,7 @@ export default function FleetGallery({
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (imageCount <= 1 || paused) return;
+    if (imageCount <= 1 || paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => {
       setActive((i) => i + 1);
     }, AUTO_INTERVAL);
@@ -54,7 +54,7 @@ export default function FleetGallery({
     ));
   };
 
-  const mainHeight = size === "lg" ? "h-72 sm:h-96" : "h-52 sm:h-60";
+  const mainHeight = size === "lg" ? "aspect-[4/3] sm:aspect-auto sm:h-96" : "h-52 sm:h-60";
 
   return (
     <div

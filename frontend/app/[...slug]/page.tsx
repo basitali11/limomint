@@ -5,10 +5,11 @@ import {siteUrl} from '@/lib/site'
 
 export const revalidate = 60
 
-export async function generateMetadata({params}: {params: {slug: string[]}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{slug: string[]}>}): Promise<Metadata> {
+  const {slug} = await params
   const title = 'Page not found | LimoMint'
   const description = 'The page you requested could not be found.'
-  const canonical = siteUrl(`/${params.slug.join('/')}`)
+  const canonical = siteUrl(`/${slug.join('/')}`)
   const image = siteUrl('/og.jpg')
 
   return {
@@ -38,8 +39,9 @@ function isReservedPath(path: string) {
   return reservedPaths.has(normalizeRedirectPath(path).slice(1).split('/')[0])
 }
 
-export default async function RedirectOrNotFound({params}: {params: {slug: string[]}}) {
-  const path = `/${params.slug.join('/')}`
+export default async function RedirectOrNotFound({params}: {params: Promise<{slug: string[]}>}) {
+  const {slug} = await params
+  const path = `/${slug.join('/')}`
   if (isReservedPath(path)) notFound()
 
   const match = await getRedirect(path).catch(() => null)
